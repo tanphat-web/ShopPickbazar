@@ -1,0 +1,441 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Client.master.cs" Inherits="ShopPickbazar.Client" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="./Content/CSS/output.css">
+    <link rel="stylesheet" href="./Content/CSS/styles.css">
+    <link rel="stylesheet" href="./Content/Plugin/flickity.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <header class="site-header top-0 z-50 h-14 w-full md:h-16 lg:h-22 fixed transition  bg-white">
+            <div
+                class="flex h-14 w-full transform-gpu items-center justify-between border-b border-border-200 bg-white px-4 py-5 shadow-sm transition-transform duration-300 md:h-16 lg:h-22 lg:px-8 lg:absolute lg:border-0 lg:bg-transparent lg:shadow-none">
+                <div class="logo lg:mx-0 mx-auto">
+                    <a href="/" class="max-w-[150px] overflow-hidden inline-block">
+                        <img src="./Content/Images/PickBazar.png" alt="" class="w-full">
+                    </a>
+                </div>
+                <div class="search w-full max-w-3xl hidden lg:block relative opacity-0 pointer-events-none transition">
+                    <div class=" w-full flex items-center ">
+                        <button type="button"
+                            class="absolute top-1/2 left-0 h-full w-[45px] bg-transparent translate-y-[-50%] flex items-center justify-center">
+                            <i class='bx bx-search text-xl'></i>
+                        </button>
+                        <input type="text"
+                            class=" focus:border-green-800 w-3/4 pl-[47px] pr-4 h-12 outline-green-700 bg-gray-100 focus:bg-transparent  rounded-lg"
+                            placeholder="Search your products from here ">
+
+                    </div>
+                </div>
+                <ul class=" items-center gap-6 hidden lg:flex">
+                    <li>
+                        <a href="" class="text-base transition hover:text-[var(--color-accent)]">Shop</a>
+                    </li>
+                    <li>
+                        <a href="" class="text-base transition hover:text-[var(--color-accent)]">Offers</a>
+                    </li>
+                    <li>
+                        <a href="" class="text-base transition hover:text-[var(--color-accent)]">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="" class="text-base transition hover:text-[var(--color-accent)]">Contact</a>
+                    </li>
+                    <li id="auth">
+                        <button type="button"
+                            class="text-white text-base bg-[var(--color-accent)]  hover:bg-[var(--color-accent-hover)] rounded-md px-2 py-1">Login</button>
+                    </li> 
+                    <%--<li class="profile relative">
+                        <button type="button" class="w-9 h-9 rounded-full overflow-hidden border">
+                            <img src="./Content/Images/avatar.svg" alt="avatar">
+                        </button>
+                        <ul
+                            class="profile-menu absolute top-full right-0 bg-white w-[200px] block transition duration-300 opacity-0 pointer-events-none">
+                            <li>
+                                <a href=""
+                                    class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Profile</a>
+                            </li>
+                            <li>
+                                <a href=""
+                                    class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">My
+                                    Order</a>
+                            </li>
+                            <li>
+                                <a href=""
+                                    class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Checkout</a>
+                            </li>
+                            <li>
+                                <a href=""
+                                    class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Logout</a>
+                            </li>
+                        </ul>
+                    </li>--%>
+                </ul>
+            </div>
+        </header>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <nav class=" fixed bottom-0 left-0 w-full bg-white shadow-400 h-12 z-30 lg:hidden block">
+            <ul class="px-4 flex items-center justify-between h-full">
+                <li>
+                    <button type="button" class="hover:text-[var(--color-accent)] btn-group transition" title="Burger Menu"
+                        data-button="menu-mobile">
+                        <svg width="25.567" height="18" viewBox="0 0 25.567 18" class="false">
+                            <g transform="translate(-776 -462)">
+                                <rect width="12.749" height="2.499" rx="1.25" transform="translate(776 462)"
+                                    fill="currentColor"></rect>
+                                <rect width="25.567" height="2.499" rx="1.25" transform="translate(776 469.75)"
+                                    fill="currentColor"></rect>
+                                <rect width="17.972" height="2.499" rx="1.25" transform="translate(776 477.501)"
+                                    fill="currentColor"></rect>
+                            </g>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="hover:text-[var(--color-accent)] btn-group transition" title="Search"
+                        data-button="formInputSearch">
+                        <svg viewBox="0 0 17.048 18" width="17.05" height="18">
+                            <path
+                                d="M380.321,383.992l3.225,3.218c.167.167.341.329.5.506a.894.894,0,1,1-1.286,1.238c-1.087-1.067-2.179-2.131-3.227-3.236a.924.924,0,0,0-1.325-.222,7.509,7.509,0,1,1-3.3-14.207,7.532,7.532,0,0,1,6,11.936C380.736,383.462,380.552,383.685,380.321,383.992Zm-5.537.521a5.707,5.707,0,1,0-5.675-5.72A5.675,5.675,0,0,0,374.784,384.513Z"
+                                transform="translate(-367.297 -371.285)" fill="currentColor"></path>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <a href="/" class="hover:text-[var(--color-accent)] transition" title="Home">
+                        <svg width="17.996" height="20.442" viewBox="0 0 17.996 20.442">
+                            <g transform="translate(-30.619 0.236)">
+                                <path
+                                    d="M48.187,7.823,39.851.182A.7.7,0,0,0,38.9.2L31.03,7.841a.7.7,0,0,0-.211.5V19.311a.694.694,0,0,0,.694.694H37.3A.694.694,0,0,0,38,19.311V14.217h3.242v5.095a.694.694,0,0,0,.694.694h5.789a.694.694,0,0,0,.694-.694V8.335a.7.7,0,0,0-.228-.512ZM47.023,18.617h-4.4V13.522a.694.694,0,0,0-.694-.694H37.3a.694.694,0,0,0-.694.694v5.095H32.2V8.63l7.192-6.98L47.02,8.642v9.975Z"
+                                    transform="translate(0 0)" fill="currentColor" stroke="currentColor"
+                                    stroke-width="0.4"></path>
+                            </g>
+                        </svg>
+                    </a>
+                </li>
+                <li>
+                    <button type="button" class="hover:text-[var(--color-accent)] btn-group transition" title="Cart"
+                        data-button="cart">
+                        <svg width="18" height="18" viewBox="0 0 18 18">
+                            <g transform="translate(-127 -122)">
+                                <path
+                                    d="M4.7,3.8H17.3a.9.9,0,0,1,.9.9V17.3a.9.9,0,0,1-.9.9H4.7a.9.9,0,0,1-.9-.9V4.7A.9.9,0,0,1,4.7,3.8ZM2,4.7A2.7,2.7,0,0,1,4.7,2H17.3A2.7,2.7,0,0,1,20,4.7V17.3A2.7,2.7,0,0,1,17.3,20H4.7A2.7,2.7,0,0,1,2,17.3ZM11,11C8.515,11,6.5,8.583,6.5,5.6H8.3c0,2.309,1.5,3.6,2.7,3.6s2.7-1.291,2.7-3.6h1.8C15.5,8.583,13.485,11,11,11Z"
+                                    transform="translate(125 120)" fill="currentColor" fill-rule="evenodd"></path>
+                            </g>
+                        </svg>
+                    </button>
+                </li>
+                <li>
+                    <button type="button" class="hover:text-[var(--color-accent)] btn-group transition" title="Login"
+                        data-button="formLogin">
+                        <svg width="16.577" height="18.6" viewBox="0 0 16.577 18.6">
+                            <g transform="translate(-95.7 -121.203)">
+                                <path
+                                    d="M-7722.37,2933a.63.63,0,0,1-.63-.63c0-4.424,2.837-6.862,7.989-6.862s7.989,2.438,7.989,6.862a.629.629,0,0,1-.63.63Zm.647-1.251h13.428c-.246-3.31-2.5-4.986-6.713-4.986s-6.471,1.673-6.714,4.986Zm2.564-12.518a4.1,4.1,0,0,1,1.172-3,4.1,4.1,0,0,1,2.979-1.229,4.1,4.1,0,0,1,2.979,1.229,4.1,4.1,0,0,1,1.171,3,4.341,4.341,0,0,1-4.149,4.5,4.344,4.344,0,0,1-4.16-4.5Zm1.251,0a3.1,3.1,0,0,0,2.9,3.254,3.094,3.094,0,0,0,2.9-3.253,2.878,2.878,0,0,0-.813-2.109,2.88,2.88,0,0,0-2.085-.872,2.843,2.843,0,0,0-2.1.856,2.841,2.841,0,0,0-.806,2.122Z"
+                                    transform="translate(7819 -2793.5)" fill="currentColor" stroke="currentColor"
+                                    stroke-width="0.6"></path>
+                            </g>
+                        </svg>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+        <nav id="menu-mobile"
+            class=" fixed top-0 left-0 w-screen h-screen z-[90] duration-300 opacity-0 pointer-events-none">
+            <div
+                class="absolute bg-white h-full w-screen max-w-md shadow-xl z-50  -translate-x-full transition-transform duration-300 menu-wrapper">
+                <div class="py-5 px-5 flex items-center justify-between border-b">
+                    <a href="" class="inline-block max-w-[150px]"><img src="./Content/Images/PickBazar.png" alt=""></a>
+                    <button title="Close"
+                        class=" btnClose flex h-7 w-7 items-center justify-center align-middle rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0"><svg
+                            class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg></button>
+                </div>
+                <ul class="px-6 py-4 font-semibold w-full ">
+                    <li class=" py-3">
+                        <a href="" class=" block text-base transition hover:text-[var(--color-accent)] ">Shops</a>
+                    </li>
+                    <li class=" py-3">
+                        <a href="" class=" block text-base transition hover:text-[var(--color-accent)] ">Offers</a>
+                    </li>
+                    <li class=" py-3">
+                        <a href="" class=" block text-base transition hover:text-[var(--color-accent)] ">FAQ</a>
+                    </li>
+                    <li class=" py-3">
+                        <a href="" class=" block text-base transition hover:text-[var(--color-accent)] ">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+            </div>
+        </nav>
+        <div id="formLogin"
+            class="fixed top-0 left-0 w-full h-screen z-[90] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
+            <div class="max-w-lg w-full bg-white rounded-xl py-8 px-4 mx-auto relative z-50 ">
+                <div class="flex items-center">
+                    <a href="/" class=" mx-auto max-w-[120px] inline-block">
+                        <img src="./Content/Images/PickBazar.png" alt="" class="">
+                    </a>
+                </div>
+                <button title="Close"
+                    class="btnClose absolute top-3 right-2 h-7 w-7 flex items-center justify-center rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0"><svg
+                        class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <p class="p-5 text-center ">Login with your email & password</p>
+                <div class="form-group">
+                    <label for="Email">
+                        <span class="block mb-1">Email:</span>
+                    </label>
+                    <input type="email" placeholder="example: tanphat@email.com" class="w-full border p-2 rounded-lg">
+                </div>
+                <div class="pt-4 form-group">
+                    <label for="Password" class="flex items-center justify-between mb-1">
+                        <span class="block ">Password:</span>
+                        <a href="" class="text-sm text-accent hover:text-[var(--color-accent)]-hover underline">Forgot
+                            password</a>
+                    </label>
+                    <div class="relative" id="pw">
+                        <input type="password" placeholder="Enter your password" class="w-full border p-2 rounded-lg">
+                        <div id="show-password"
+                            class="absolute top-1/2 -translate-y-1/2 right-[10px] cursor-pointer block">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z">
+                                </path>
+                            </svg>
+                        </div>
+                        <div id="hide-password"
+                            class="absolute top-1/2 -translate-y-1/2 right-[10px] cursor-pointer hidden">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" class="h-6 w-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group pt-4">
+                    <button
+                        class="w-full bg-[var(--color-accent)] text-white p-2 rounded-lg hover:bg-[var(--color-accent-hover)]">Login</button>
+                </div>
+                <div class="form-group pt-4 flex items-center gap-[3px] justify-center">
+                    <p class="text-center text-sm sm:text-base">Don't have any account?</p>
+                    <a href="" class="text-accent hover:text-[var(--color-accent)]-hover">Register</a>
+                </div>
+            </div>
+            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+            </div>
+        </div>
+        <div id="formInputSearch"
+            class="fixed top-0 left-0 z-[90] w-full  max-w-7xl  block  transition opacity-0 pointer-events-none ">
+            <div class=" w-full  items-center bg-white py-2 px-4">
+                <button
+                    class="absolute top-1/2 left-4 h-full w-[45px] bg-transparent translate-y-[-50%] flex items-center justify-center">
+                    <i class="bx bx-search text-xl"></i>
+                </button>
+                <input type="text"
+                    class=" focus:border-green-800 w-full pl-[47px] pr-4 h-10 outline-green-700 bg-gray-100 focus:bg-transparent  rounded-lg"
+                    placeholder="Search your products from here ">
+
+            </div>
+        </div>
+        <div id="cart" class="fixed top-0 left w-screen h-screen z-[90] duration-300 opacity-0 pointer-events-none">
+            <div
+                class="absolute right-0 bg-white h-full w-screen max-w-md shadow-xl z-50 translate-x-full  transition-transform duration-300 menu-wrapper flex flex-col">
+                <div class="py-5 px-5 flex items-center justify-between border-b">
+                    <div class="flex font-semibold text-accent"><svg width="24" height="22" class="shrink-0"
+                            viewBox="0 0 12.686 16">
+                            <g transform="translate(-27.023 -2)">
+                                <g transform="translate(27.023 5.156)">
+                                    <g>
+                                        <path
+                                            d="M65.7,111.043l-.714-9A1.125,1.125,0,0,0,63.871,101H62.459V103.1a.469.469,0,1,1-.937,0V101H57.211V103.1a.469.469,0,1,1-.937,0V101H54.862a1.125,1.125,0,0,0-1.117,1.033l-.715,9.006a2.605,2.605,0,0,0,2.6,2.8H63.1a2.605,2.605,0,0,0,2.6-2.806Zm-4.224-4.585-2.424,2.424a.468.468,0,0,1-.663,0l-1.136-1.136a.469.469,0,0,1,.663-.663l.8.8,2.092-2.092a.469.469,0,1,1,.663.663Z"
+                                            transform="translate(-53.023 -101.005)" fill="currentColor"></path>
+                                    </g>
+                                </g>
+                                <g transform="translate(30.274 2)">
+                                    <g>
+                                        <path
+                                            d="M160.132,0a3.1,3.1,0,0,0-3.093,3.093v.063h.937V3.093a2.155,2.155,0,1,1,4.311,0v.063h.937V3.093A3.1,3.1,0,0,0,160.132,0Z"
+                                            transform="translate(-157.039)" fill="currentColor"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </svg><span class="flex ltr:ml-2 rtl:mr-2">0 Item</span></div>
+                    <button title="Close"
+                        class=" btnClose flex h-7 w-7 items-center justify-center align-middle rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0"><svg
+                            class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                            fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg></button>
+                </div>
+                <!-- <div class="grow pt-16 pb-20">
+                    <div class="flex h-full flex-col items-center justify-center" style="opacity: 1;"><svg width="140"
+                            height="176" viewBox="0 0 231.91 292">
+                            <defs>
+                                <linearGradient id="linear-gradient" x1="1" y1="0.439" x2="0.369" y2="1"
+                                    gradientUnits="objectBoundingBox">
+                                    <stop offset="0" stop-color="#029477"></stop>
+                                    <stop offset="1" stop-color="#009e7f"></stop>
+                                </linearGradient>
+                            </defs>
+                            <g id="no_cart_in_bag_2" data-name="no cart in bag 2" transform="translate(-1388 -351)">
+                                <ellipse id="Ellipse_2873" data-name="Ellipse 2873" cx="115.955" cy="27.366"
+                                    rx="115.955" ry="27.366" transform="translate(1388 588.268)" fill="#ddd"
+                                    opacity="0.25"></ellipse>
+                                <path id="Path_18691" data-name="Path 18691"
+                                    d="M29.632,0H170.368A29.828,29.828,0,0,1,200,30.021V209.979A29.828,29.828,0,0,1,170.368,240H29.632A29.828,29.828,0,0,1,0,209.979V30.021A29.828,29.828,0,0,1,29.632,0Z"
+                                    transform="translate(1403 381)" fill="#009e7f"></path>
+                                <path id="Rectangle_1852" data-name="Rectangle 1852"
+                                    d="M30,0H170a30,30,0,0,1,30,30v0a30,30,0,0,1-30,30H12.857A12.857,12.857,0,0,1,0,47.143V30A30,30,0,0,1,30,0Z"
+                                    transform="translate(1403 381)" fill="#006854"></path>
+                                <path id="Rectangle_1853" data-name="Rectangle 1853"
+                                    d="M42,0H158a42,42,0,0,1,42,42v0a18,18,0,0,1-18,18H18A18,18,0,0,1,0,42v0A42,42,0,0,1,42,0Z"
+                                    transform="translate(1403 381)" fill="#006854"></path>
+                                <path id="Path_18685" data-name="Path 18685"
+                                    d="M446.31,246.056a30,30,0,1,1,30-30A30.034,30.034,0,0,1,446.31,246.056Zm0-53.294A23.3,23.3,0,1,0,469.9,216.056,23.471,23.471,0,0,0,446.31,192.762Z"
+                                    transform="translate(1056.69 164.944)" fill="#006854"></path>
+                                <path id="Path_18686" data-name="Path 18686"
+                                    d="M446.31,375.181a30,30,0,1,1,30-30A30.034,30.034,0,0,1,446.31,375.181Zm0-53.294A23.3,23.3,0,1,0,469.9,345.181,23.471,23.471,0,0,0,446.31,321.887Z"
+                                    transform="translate(1057.793 95.684)" fill="#009e7f"></path>
+                                <circle id="Ellipse_2874" data-name="Ellipse 2874" cx="28.689" cy="28.689" r="28.689"
+                                    transform="translate(1473.823 511.046)" fill="#006854"></circle>
+                                <circle id="Ellipse_2875" data-name="Ellipse 2875" cx="15.046" cy="15.046" r="15.046"
+                                    transform="translate(1481.401 547.854) rotate(-45)" fill="#009e7f"></circle>
+                                <path id="Path_18687" data-name="Path 18687"
+                                    d="M399.71,531.27a71.755,71.755,0,0,1,12.65-13.6c3.4-2.863-1.5-7.726-4.882-4.882a78.392,78.392,0,0,0-13.73,15c-2.56,3.644,3.424,7.1,5.962,3.485Z"
+                                    transform="translate(1060.579 -35.703)" fill="#006854"></path>
+                                <path id="Path_18688" data-name="Path 18688"
+                                    d="M412.913,527.786a78.419,78.419,0,0,0-13.73-15c-3.38-2.843-8.289,2.017-4.882,4.882a71.785,71.785,0,0,1,12.65,13.6c2.535,3.609,8.525.162,5.962-3.485Z"
+                                    transform="translate(1060.566 -35.704)" fill="#006854"></path>
+                                <path id="Path_18689" data-name="Path 18689"
+                                    d="M583.278,527.786a78.417,78.417,0,0,0-13.73-15c-3.38-2.843-8.289,2.017-4.882,4.882a71.768,71.768,0,0,1,12.65,13.6c2.535,3.609,8.525.162,5.962-3.485Z"
+                                    transform="translate(970.304 -35.704)" fill="#006854"></path>
+                                <path id="Path_18690" data-name="Path 18690"
+                                    d="M570.075,531.27a71.77,71.77,0,0,1,12.65-13.6c3.4-2.863-1.5-7.726-4.882-4.882a78.407,78.407,0,0,0-13.73,15c-2.56,3.644,3.424,7.1,5.962,3.485Z"
+                                    transform="translate(970.318 -35.703)" fill="#006854"></path>
+                                <path id="Path_18692" data-name="Path 18692"
+                                    d="M301.243,287.464a19.115,19.115,0,0,1,8.071,9.077,19.637,19.637,0,0,1,1.6,7.88v26.085a19.349,19.349,0,0,1-9.672,16.957c-10.048-6.858-16.544-17.742-16.544-30S291.2,294.322,301.243,287.464Z"
+                                    transform="translate(1292.301 101.536)" fill="url(#linear-gradient)"></path>
+                                <path id="Path_18693" data-name="Path 18693"
+                                    d="M294.371,287.464a19.115,19.115,0,0,0-8.071,9.077,19.637,19.637,0,0,0-1.6,7.88v26.085a19.349,19.349,0,0,0,9.672,16.957c10.048-6.858,16.544-17.742,16.544-30S304.419,294.322,294.371,287.464Z"
+                                    transform="translate(1118.301 101.536)" fill="url(#linear-gradient)"></path>
+                            </g>
+                        </svg>
+                        <h4 class="mt-6 text-base font-semibold">No products found</h4>
+                    </div>
+                </div> -->
+                <div class="grow  pb-20 overf" style="transform: none; transform-origin: 50% 50% 0px;">
+                    <div class="flex items-center  border-b border-solid border-border-200 border-opacity-75 px-4 py-4 text-sm sm:px-6"
+                        style="opacity: 1; transform: none; transform-origin: 50% 50% 0px;">
+                        <div class="flex-shrink-0">
+                            <div
+                                class="flex overflow-hidden flex-col-reverse items-center w-8 h-24 bg-gray-100 text-heading rounded-full">
+                                <button
+                                    class="cursor-pointer p-2 transition-colors duration-200 hover:bg-[var(--color-accent-hover)] focus:outline-0 hover:!bg-gray-100"><span
+                                        class="sr-only">minus</span><svg fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="h-3 w-3 stroke-2.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4"></path>
+                                    </svg></button>
+                                <div
+                                    class="flex flex-1 items-center justify-center px-3 text-sm font-semibold !px-0 text-heading">
+                                    1</div><button
+                                    class="cursor-pointer p-2 transition-colors duration-200 hover:bg-[var(--color-accent-hover)] focus:outline-0 hover:!bg-gray-100"
+                                    title=""><span class="sr-only">plus</span><svg fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor" class="md:w-4.5 h-3.5 w-3.5 stroke-2.5 md:h-4.5">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                                    </svg></button>
+                            </div>
+                        </div>
+                        <div
+                            class="relative mx-4 flex h-10 w-10 shrink-0  items-center justify-center overflow-hidden bg-gray-100 sm:h-16 sm:w-16">
+                            <img src="https://pickbazar-react.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F1%2FApples.jpg&w=1920&q=75"
+                                alt="Mango">
+                        </div>
+                        <div class="grow">
+                            <h3 class="font-bold text-heading">Mango </h3>
+                            <p class="my-2.5 font-semibold text-accent">$2.50</p><span class="text-xs ">1 X
+                                1lb</span>
+                        </div><span class="font-bold text-heading ltr:ml-auto rtl:mr-auto">$2.50</span><button
+                            class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-muted transition-all duration-200 hover:bg-gray-100 hover:text-red-600 focus:bg-gray-100 focus:text-red-600 focus:outline-0 ltr:ml-3 ltr:-mr-2 rtl:mr-3 rtl:-ml-2"><svg
+                                class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path fill-rule="evenodd"
+                                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg></button>
+                    </div>
+                </div>
+                <footer class="fixed bottom-0 z-10 w-full max-w-md bg-white px-6 py-5"><button
+                        class="flex h-12 w-full justify-between rounded-full bg-[var(--color-accent)] p-1 text-sm font-bold shadow-700 transition-colors hover:bg-[var(--color-accent-hover)] focus:bg-[var(--color-accent-hover)] focus:outline-0 md:h-14"><span
+                            class="flex h-full flex-1 items-center px-5 text-white">Checkout</span><span
+                            class="flex h-full shrink-0 items-center rounded-full bg-white px-5 text-accent">$0.00</span></button>
+                </footer>
+            </div>
+            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+            </div>
+        </div>
+        
+        <button type="button" id="product-cart"
+            class=" fixed top-1/2 right-0 z-40 -mt-12 hidden flex-col items-center justify-center rounded bg-[var(--color-accent)] p-3 pt-3.5 text-sm font-semibold text-white shadow-900 transition-colors duration-200 hover:bg-[var(--color-accent-hover)] focus:outline-0 ltr:right-0 ltr:rounded-tr-none ltr:rounded-br-none rtl:left-0 rtl:rounded-tl-none rtl:rounded-bl-none lg:flex"><span
+                class="flex pb-0.5 "><svg width="14" height="16" class="shrink-0" viewBox="0 0 12.686 16">
+                    <g transform="translate(-27.023 -2)">
+                        <g transform="translate(27.023 5.156)">
+                            <g>
+                                <path
+                                    d="M65.7,111.043l-.714-9A1.125,1.125,0,0,0,63.871,101H62.459V103.1a.469.469,0,1,1-.937,0V101H57.211V103.1a.469.469,0,1,1-.937,0V101H54.862a1.125,1.125,0,0,0-1.117,1.033l-.715,9.006a2.605,2.605,0,0,0,2.6,2.8H63.1a2.605,2.605,0,0,0,2.6-2.806Zm-4.224-4.585-2.424,2.424a.468.468,0,0,1-.663,0l-1.136-1.136a.469.469,0,0,1,.663-.663l.8.8,2.092-2.092a.469.469,0,1,1,.663.663Z"
+                                    transform="translate(-53.023 -101.005)" fill="currentColor"></path>
+                            </g>
+                        </g>
+                        <g transform="translate(30.274 2)">
+                            <g>
+                                <path
+                                    d="M160.132,0a3.1,3.1,0,0,0-3.093,3.093v.063h.937V3.093a2.155,2.155,0,1,1,4.311,0v.063h.937V3.093A3.1,3.1,0,0,0,160.132,0Z"
+                                    transform="translate(-157.039)" fill="currentColor"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg><span class="flex ltr:ml-2 rtl:mr-2">2 Items</span></span><span
+                class="mt-3 w-full rounded bg-white px-2 py-2 text-accent">$6.50</span></button>
+    </form>
+    <script src="./Content/Plugin/flickity.pkgd.min.js"></script>
+    <script>
+            const carousel = document.querySelector('.carousel');
+            const flkty = new Flickity(carousel, {
+                // options
+                cellAlign: 'left',
+            contain: true,
+            pageDots: false,
+            prevNextButtons: true,
+            autoPlay: 1500,
+            pauseAutoPlayOnHover: true,
+            prevNextButtons: false
+        });
+    </script>
+    <script src="./Content/JavaScript/main.js"></script>
+</body>
+</html>

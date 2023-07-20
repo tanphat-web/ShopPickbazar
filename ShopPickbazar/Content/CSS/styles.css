@@ -1,0 +1,63 @@
+:root {
+  --color-accent: rgb(0, 159, 127);
+  --color-accent-hover: rgb(1, 147, 118);
+}
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 6px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: #fff;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #b2b2b2;
+  border-radius: 50px;
+}
+.text-accent {
+  color: var(--color-accent) !important;
+}
+.text-accent-hover {
+  color: var(--color-accent-hover) !important;
+}
+.bg-accent {
+  background-color: var(--color-accent);
+}
+.bg-accent-hover {
+  background-color: var(--color-accent-hover);
+}
+header.site-header.active {
+  background: #fff;
+}
+header.site-header.active .search {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: visible;
+}
+#menu-mobile.active,
+#formLogin.active,
+#formInputSearch.active,
+#cart.active,
+#menu-filter.active,
+#formUpdatePhone.active,
+#formUpdateAddress.active,
+.profile-menu.active {
+  opacity: 1;
+  pointer-events: visible;
+}
+#menu-mobile.active .menu-wrapper,
+#menu-filter.active .menu-wrapper {
+  transform: translateX(0);
+}
+#cart.active .menu-wrapper {
+  transform: translateX(0);
+}
+body.active {
+  overflow: hidden;
+}
+.sub-product-gallery .is-selected.is-nav-selected {
+  border-color: var(--color-accent);
+}
