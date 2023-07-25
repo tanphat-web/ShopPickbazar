@@ -46,7 +46,6 @@
                             <div class="col-12">
                                 <asp:Button runat="server" Text="Thêm" CssClass="btn btn-success" ID="Button1" OnClick="ButtonCreateProduct"  />
                                 <a href="/admin/" class="btn btn-danger ">Hủy bỏ</a>    
-                                
                             </div>
                         </div>
 
@@ -55,4 +54,5 @@
             </div>
         </div>
     </div>
+  
 </asp:Content>

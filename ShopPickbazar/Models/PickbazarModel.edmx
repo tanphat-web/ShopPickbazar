@@ -52,6 +52,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PRODUCTS__Catego__5165187F">
+          <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="pickbazarModelStoreContainer">
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
@@ -59,6 +71,10 @@
           <AssociationSet Name="FK__CATEGORIE__paren__37A5467C" Association="Self.FK__CATEGORIE__paren__37A5467C">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="CATEGORIES1" EntitySet="CATEGORIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__Catego__5165187F" Association="Self.FK__PRODUCTS__Catego__5165187F">
+            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -77,6 +93,7 @@
           <Property Name="parent_id" Type="Int32" />
           <NavigationProperty Name="CATEGORIES1" Relationship="Self.FK__CATEGORIE__paren__37A5467C" FromRole="CATEGORIES" ToRole="CATEGORIES1" />
           <NavigationProperty Name="CATEGORy1" Relationship="Self.FK__CATEGORIE__paren__37A5467C" FromRole="CATEGORIES1" ToRole="CATEGORIES" />
+          <NavigationProperty Name="PRODUCTS" Relationship="Self.FK__PRODUCTS__Catego__5165187F" FromRole="CATEGORIES" ToRole="PRODUCTS" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -91,6 +108,7 @@
           <Property Name="Discount" Type="Double" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CATEGORy" Relationship="Self.FK__PRODUCTS__Catego__5165187F" FromRole="PRODUCTS" ToRole="CATEGORIES" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -115,6 +133,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__PRODUCTS__Catego__5165187F">
+          <End Role="CATEGORIES" Type="Self.CATEGORy" Multiplicity="0..1" />
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIES">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="PRODUCTS">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="pickbazarEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORy" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
@@ -122,6 +152,10 @@
           <AssociationSet Name="FK__CATEGORIE__paren__37A5467C" Association="Self.FK__CATEGORIE__paren__37A5467C">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="CATEGORIES1" EntitySet="CATEGORIES" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTS__Catego__5165187F" Association="Self.FK__PRODUCTS__Catego__5165187F">
+            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>

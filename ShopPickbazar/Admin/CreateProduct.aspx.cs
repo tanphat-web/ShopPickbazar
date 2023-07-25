@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopPickbazar.Models;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -51,17 +52,21 @@ namespace ShopPickbazar.Admin
                 // Lưu tệp hình ảnh vào thư mục UploadedImages
                 featuredImage.SaveAs(featuredImageFullPath);
             }
-            foreach(var file in gellaryFileUpload.PostedFiles)
+           if(gellaryFileUpload.HasFile)
             {
-                // Lấy tên tệp hình ảnh
-                string fileName = Path.GetFileName(file.FileName);
-                // Tạo đường dẫn đầy đủ cho tệp hình ảnh
-                string imageFullPath = Path.Combine(imagesPath, fileName);
-                galleryPaths.Add(fileName);
-                if (!File.Exists(imageFullPath))
+                foreach (var file in gellaryFileUpload.PostedFiles)
                 {
-                    // Lưu tệp hình ảnh vào thư mục UploadedImages
-                    file.SaveAs(imageFullPath);
+                    // Lấy tên tệp hình ảnh
+                    string fileName = Path.GetFileName(file.FileName);
+
+                    // Tạo đường dẫn đầy đủ cho tệp hình ảnh
+                    string imageFullPath = Path.Combine(imagesPath, fileName);
+                    galleryPaths.Add(fileName);
+                    if (!File.Exists(imageFullPath))
+                    {
+                        // Lưu tệp hình ảnh vào thư mục UploadedImages
+                        file.SaveAs(imageFullPath);
+                    }
                 }
             }
             InsertProduct(productName, productDescription, productQuantity, categoryId, productPrice, productSalePrice, featuredImageFileName, galleryPaths);

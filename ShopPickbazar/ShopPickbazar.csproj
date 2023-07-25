@@ -80,6 +80,7 @@
     <Content Include="Admin\CreateProduct.aspx" />
     <Content Include="Admin\css\sb-admin-2.css" />
     <Content Include="Admin\css\sb-admin-2.min.css" />
+    <Content Include="Admin\img\eye-svgrepo-com.svg" />
     <Content Include="Admin\img\undraw_posting_photo.svg" />
     <Content Include="Admin\img\undraw_profile.svg" />
     <Content Include="Admin\img\undraw_profile_1.svg" />
@@ -92,8 +93,11 @@
     <Content Include="Admin\js\sb-admin-2.min.js" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\login.html" />
+    <Content Include="Admin\ProductDetail.aspx" />
+    <Content Include="Admin\Products.aspx" />
     <Content Include="Admin\register.html" />
     <Content Include="Admin\tables.html" />
+    <Content Include="Admin\UpdateProduct.aspx" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.js" />
@@ -1774,12 +1778,12 @@
     <Content Include="Content\Plugin\flickity.pkgd.min.js" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
-    <Content Include="PickbazarModel.Context.tt">
+    <Content Include="Models\PickbazarModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PickbazarModel.Context.cs</LastGenOutput>
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
+      <LastGenOutput>PickbazarModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="PickbazarModel.tt">
+    <Content Include="Models\PickbazarModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
       <LastGenOutput>PickbazarModel.cs</LastGenOutput>
@@ -1815,8 +1819,26 @@
     <Compile Include="Admin\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CATEGORy.cs">
-      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    <Compile Include="Admin\ProductDetail.aspx.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProductDetail.aspx.designer.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Products.aspx.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Products.aspx.designer.cs">
+      <DependentUpon>Products.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\UpdateProduct.aspx.cs">
+      <DependentUpon>UpdateProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\UpdateProduct.aspx.designer.cs">
+      <DependentUpon>UpdateProduct.aspx</DependentUpon>
     </Compile>
     <Compile Include="Client.Master.cs">
       <DependentUpon>Client.Master</DependentUpon>
@@ -1835,28 +1857,31 @@
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="PickbazarModel.Context.cs">
+    <Compile Include="Models\CATEGORy.cs">
+      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PickbazarModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PickbazarModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="PickbazarModel.cs">
+    <Compile Include="Models\PickbazarModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PickbazarModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PickbazarModel.Designer.cs">
+    <Compile Include="Models\PickbazarModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="PRODUCT.cs">
+    <Compile Include="Models\PRODUCT.cs">
+      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\USER.cs">
       <DependentUpon>PickbazarModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="USER.cs">
-      <DependentUpon>PickbazarModel.tt</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Client.Master" />
@@ -2034,14 +2059,14 @@
     <Content Include="Admin\vendor\jquery\jquery.min.map" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.map" />
     <Content Include="Admin\Dashboard.Master" />
-    <EntityDeploy Include="PickbazarModel.edmx">
+    <EntityDeploy Include="Models\PickbazarModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>PickbazarModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="packages.config" />
-    <Content Include="PickbazarModel.edmx.diagram">
+    <Content Include="Models\PickbazarModel.edmx.diagram">
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
     </Content>
+    <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2052,7 +2077,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\Products\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

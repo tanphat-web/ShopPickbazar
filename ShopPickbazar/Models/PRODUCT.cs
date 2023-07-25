@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShopPickbazar
+namespace ShopPickbazar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -23,5 +23,7 @@ namespace ShopPickbazar
         public Nullable<double> Discount { get; set; }
         public int Quantity { get; set; }
         public string DESCRIPTION { get; set; }
+    
+        public virtual CATEGORy CATEGORy { get; set; }
     }
 }

@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShopPickbazar
+namespace ShopPickbazar.Models
 {
     using System;
     using System.Collections.Generic;
@@ -18,6 +18,7 @@ namespace ShopPickbazar
         public CATEGORy()
         {
             this.CATEGORIES1 = new HashSet<CATEGORy>();
+            this.PRODUCTS = new HashSet<PRODUCT>();
         }
     
         public int id { get; set; }
@@ -29,5 +30,7 @@ namespace ShopPickbazar
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CATEGORy> CATEGORIES1 { get; set; }
         public virtual CATEGORy CATEGORy1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PRODUCT> PRODUCTS { get; set; }
     }
 }

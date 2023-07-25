@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ShopPickbazar
+namespace ShopPickbazar.Models
 {
     using System;
     using System.Collections.Generic;
