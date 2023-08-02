@@ -32,7 +32,7 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="admin">
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index.aspx">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
@@ -44,7 +44,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item active">
-                    <a class="nav-link" href="admin">
+                    <a class="nav-link" href="Index.aspx">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -59,9 +59,9 @@
                     <div id="collapseProducts" class="collapse" aria-labelledby="headingPages"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Tất cả sản phẩm</a>
-                            <a class="collapse-item" href="">Danh mục sản phẩm</a>
-                            <a class="collapse-item" href="">Thêm sản phẩm</a>
+                            <a class="collapse-item" href="Products.aspx">Tất cả sản phẩm</a>
+                            <a class="collapse-item" href="ProductCategory.aspx">Danh mục sản phẩm</a>
+                            <a class="collapse-item" href="CreateProduct.aspx">Thêm sản phẩm</a>
                         </div>
                     </div>
                 </li>
@@ -87,8 +87,7 @@
                     </a>
                     <div id="collapseOders" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Tất cả danh mục</a>
-                            <a class="collapse-item" href="">Thêm danh mục</a>
+                            <a class="collapse-item" href="Order.aspx">Tất cả đơn hàng</a>
                         </div>
                     </div>
                 </li>

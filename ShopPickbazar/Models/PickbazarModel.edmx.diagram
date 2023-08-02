@@ -4,12 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="54ecd7bdeeb04647a1472398285f90b6" Name="Diagram1">
-        <EntityTypeShape EntityType="pickbazarModel.CATEGORy" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+      <Diagram DiagramId="b1224164609542369388c3c1a0b32001" Name="Diagram1">
+        <EntityTypeShape EntityType="pickbazarModel.CATEGORy" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pickbazarModel.ORDERDETAIL" Width="1.5" PointX="5.25" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="pickbazarModel.ORDER" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="pickbazarModel.PRODUCT" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="pickbazarModel.USER" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
-        <AssociationConnector Association="pickbazarModel.FK__CATEGORIE__paren__37A5467C" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="pickbazarModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pickbazarModel.USER" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
         <AssociationConnector Association="pickbazarModel.FK__PRODUCTS__Catego__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="pickbazarModel.FK__ORDERDETA__Produ__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="pickbazarModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="pickbazarModel.FK__ORDERS__UserId__628FA481" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

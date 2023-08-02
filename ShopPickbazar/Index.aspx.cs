@@ -11,15 +11,53 @@ namespace ShopPickbazar
 {
     public partial class Index : System.Web.UI.Page
     {
+        pickbazarEntities db = new pickbazarEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-            using (pickbazarEntities db = new pickbazarEntities())
+            GetCategories();
+            GetProductByCategoryId();
+        }
+       private void GetCategories()
+        {
+            myRepeater.DataSource = db.CATEGORIES.ToList();
+            categoriesMb.DataSource = db.CATEGORIES.ToList();
+            categoriesMb.DataBind();
+            myRepeater.DataBind();
+        }
+      
+        private void GetProductByCategoryId()
+        {
+            int categoryId;
+            if (!String.IsNullOrEmpty(Request.QueryString["category"]))
             {
-                myRepeater.DataSource = db.CATEGORIES.ToList();
-                myRepeater.DataBind();
+                 categoryId = Convert.ToInt32(Request.QueryString["category"]);
+               
+            }else
+            {
+                var firstCategory = db.CATEGORIES.FirstOrDefault();
+                 categoryId = firstCategory.id;
+              
+            }
+            var query = from product in db.PRODUCTS
+                        where product.CategoryId == categoryId
+                        select new
+                        {
+                           product.Id,
+                            product.ProductName,
+                            product.Price,
+                            product.FeaturedImage,
+                        };
+            if(query.Count() > 0 )
+            {
+                Products.DataSource = query.ToList();
+                Products.DataBind();
+                noProductFound.Visible = false;
+            }
+            else
+            {
+                noProductFound.Visible = true;
             }
         }
-       
        
     }
 }

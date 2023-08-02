@@ -19,15 +19,16 @@ namespace ShopPickbazar
 
         private void RegisterRoutes(RouteCollection routes)
         {
-            routes.MapPageRoute("AdminDashboard", "admin", "~/Admin/Index.aspx");
-            routes.MapPageRoute("AdminProducts", "admin/tat-ca-san-pham", "~/Admin/Products.aspx");
-
+            routes.MapPageRoute("ClientHomePage", "", "~/Index.aspx");
+            
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
             
-            Session["LoggedInUser"] = "example_user";
+            Session["LoggedInUser"] = null;
+            Session["category"] = null;
+
         }
     }
 }

@@ -14,6 +14,12 @@ namespace ShopPickbazar.Models
     
     public partial class PRODUCT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PRODUCT()
+        {
+            this.ORDERDETAILS = new HashSet<ORDERDETAIL>();
+        }
+    
         public int Id { get; set; }
         public Nullable<int> CategoryId { get; set; }
         public string ProductName { get; set; }
@@ -25,5 +31,7 @@ namespace ShopPickbazar.Models
         public string DESCRIPTION { get; set; }
     
         public virtual CATEGORy CATEGORy { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ORDERDETAIL> ORDERDETAILS { get; set; }
     }
 }

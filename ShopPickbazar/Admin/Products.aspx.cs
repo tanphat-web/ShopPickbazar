@@ -39,8 +39,7 @@ namespace ShopPickbazar.Admin
                             };
             
                 dataProducts.DataSource = query.ToList();
-
-            dataProducts.DataBind();
+                dataProducts.DataBind();
         }
         protected void DeleteProduct()
         {

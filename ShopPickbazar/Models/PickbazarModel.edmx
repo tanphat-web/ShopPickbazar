@@ -15,6 +15,25 @@
           <Property Name="category_slug" Type="varchar" MaxLength="255" />
           <Property Name="parent_id" Type="int" />
         </EntityType>
+        <EntityType Name="ORDERDETAILS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="ORDERS">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalPrice" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserId" Type="int" />
+        </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
             <PropertyRef Name="Id" />
@@ -29,6 +48,16 @@
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="DESCRIPTION" Type="ntext" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="USERS">
           <Key>
             <PropertyRef Name="Id" />
@@ -39,16 +68,31 @@
           <Property Name="Position" Type="nvarchar" MaxLength="50" />
           <Property Name="Avatar" Type="varchar" MaxLength="255" />
           <Property Name="Password" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="70" />
+          <Property Name="Address" Type="ntext" />
+          <Property Name="PhoneNumber" Type="int" />
         </EntityType>
-        <Association Name="FK__CATEGORIE__paren__37A5467C">
-          <End Role="CATEGORIES" Type="Self.CATEGORIES" Multiplicity="0..1" />
-          <End Role="CATEGORIES1" Type="Self.CATEGORIES" Multiplicity="*" />
+        <Association Name="FK__ORDERDETA__Produ__619B8048">
+          <End Role="PRODUCTS" Type="Self.PRODUCTS" Multiplicity="0..1" />
+          <End Role="ORDERDETAILS" Type="Self.ORDERDETAILS" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CATEGORIES">
-              <PropertyRef Name="id" />
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="CATEGORIES1">
-              <PropertyRef Name="parent_id" />
+            <Dependent Role="ORDERDETAILS">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__UserId__628FA481">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -64,17 +108,40 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="ORDERS" Type="Self.ORDERS" Multiplicity="0..1" />
+          <End Role="ORDERDETAILS" Type="Self.ORDERDETAILS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDERDETAILS">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="pickbazarModelStoreContainer">
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERDETAILS" EntityType="Self.ORDERDETAILS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDERS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CATEGORIE__paren__37A5467C" Association="Self.FK__CATEGORIE__paren__37A5467C">
-            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
-            <End Role="CATEGORIES1" EntitySet="CATEGORIES" />
+          <AssociationSet Name="FK__ORDERDETA__Produ__619B8048" Association="Self.FK__ORDERDETA__Produ__619B8048">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__UserId__628FA481" Association="Self.FK__ORDERS__UserId__628FA481">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
           <AssociationSet Name="FK__PRODUCTS__Catego__5165187F" Association="Self.FK__PRODUCTS__Catego__5165187F">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -91,9 +158,30 @@
           <Property Name="category_icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="category_slug" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="parent_id" Type="Int32" />
-          <NavigationProperty Name="CATEGORIES1" Relationship="Self.FK__CATEGORIE__paren__37A5467C" FromRole="CATEGORIES" ToRole="CATEGORIES1" />
-          <NavigationProperty Name="CATEGORy1" Relationship="Self.FK__CATEGORIE__paren__37A5467C" FromRole="CATEGORIES1" ToRole="CATEGORIES" />
           <NavigationProperty Name="PRODUCTS" Relationship="Self.FK__PRODUCTS__Catego__5165187F" FromRole="CATEGORIES" ToRole="PRODUCTS" />
+        </EntityType>
+        <EntityType Name="ORDERDETAIL">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <NavigationProperty Name="PRODUCT" Relationship="Self.FK__ORDERDETA__Produ__619B8048" FromRole="ORDERDETAILS" ToRole="PRODUCTS" />
+          <NavigationProperty Name="ORDER" Relationship="Self.FK_OrderDetails_Orders" FromRole="ORDERDETAILS" ToRole="ORDERS" />
+        </EntityType>
+        <EntityType Name="ORDER">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalPrice" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <NavigationProperty Name="ORDERDETAILS" Relationship="Self.FK_OrderDetails_Orders" FromRole="ORDERS" ToRole="ORDERDETAILS" />
+          <NavigationProperty Name="USER" Relationship="Self.FK__ORDERS__UserId__628FA481" FromRole="ORDERS" ToRole="USERS" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -109,6 +197,17 @@
           <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CATEGORy" Relationship="Self.FK__PRODUCTS__Catego__5165187F" FromRole="PRODUCTS" ToRole="CATEGORIES" />
+          <NavigationProperty Name="ORDERDETAILS" Relationship="Self.FK__ORDERDETA__Produ__619B8048" FromRole="PRODUCTS" ToRole="ORDERDETAILS" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -120,19 +219,11 @@
           <Property Name="Position" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Avatar" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="Int32" />
+          <NavigationProperty Name="ORDERS" Relationship="Self.FK__ORDERS__UserId__628FA481" FromRole="USERS" ToRole="ORDERS" />
         </EntityType>
-        <Association Name="FK__CATEGORIE__paren__37A5467C">
-          <End Role="CATEGORIES" Type="Self.CATEGORy" Multiplicity="0..1" />
-          <End Role="CATEGORIES1" Type="Self.CATEGORy" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CATEGORIES">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CATEGORIES1">
-              <PropertyRef Name="parent_id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__PRODUCTS__Catego__5165187F">
           <End Role="CATEGORIES" Type="Self.CATEGORy" Multiplicity="0..1" />
           <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="*" />
@@ -145,17 +236,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ORDERDETA__Produ__619B8048">
+          <End Role="PRODUCTS" Type="Self.PRODUCT" Multiplicity="0..1" />
+          <End Role="ORDERDETAILS" Type="Self.ORDERDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDERDETAILS">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="0..1" />
+          <End Role="ORDERDETAILS" Type="Self.ORDERDETAIL" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ORDERS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDERDETAILS">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ORDERS__UserId__628FA481">
+          <End Role="USERS" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="ORDERS" Type="Self.ORDER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ORDERS">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="pickbazarEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CATEGORIES" EntityType="Self.CATEGORy" />
+          <EntitySet Name="ORDERDETAILS" EntityType="Self.ORDERDETAIL" />
+          <EntitySet Name="ORDERS" EntityType="Self.ORDER" />
           <EntitySet Name="PRODUCTS" EntityType="Self.PRODUCT" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
-          <AssociationSet Name="FK__CATEGORIE__paren__37A5467C" Association="Self.FK__CATEGORIE__paren__37A5467C">
-            <End Role="CATEGORIES" EntitySet="CATEGORIES" />
-            <End Role="CATEGORIES1" EntitySet="CATEGORIES" />
-          </AssociationSet>
           <AssociationSet Name="FK__PRODUCTS__Catego__5165187F" Association="Self.FK__PRODUCTS__Catego__5165187F">
             <End Role="CATEGORIES" EntitySet="CATEGORIES" />
             <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERDETA__Produ__619B8048" Association="Self.FK__ORDERDETA__Produ__619B8048">
+            <End Role="PRODUCTS" EntitySet="PRODUCTS" />
+            <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="ORDERS" EntitySet="ORDERS" />
+            <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ORDERS__UserId__628FA481" Association="Self.FK__ORDERS__UserId__628FA481">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="ORDERS" EntitySet="ORDERS" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -175,6 +313,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ORDERDETAILS">
+            <EntityTypeMapping TypeName="pickbazarModel.ORDERDETAIL">
+              <MappingFragment StoreEntitySet="ORDERDETAILS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ORDERS">
+            <EntityTypeMapping TypeName="pickbazarModel.ORDER">
+              <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="pickbazarModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
@@ -190,6 +349,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="pickbazarModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="USERS">
             <EntityTypeMapping TypeName="pickbazarModel.USER">
               <MappingFragment StoreEntitySet="USERS">
@@ -199,6 +369,9 @@
                 <ScalarProperty Name="Position" ColumnName="Position" />
                 <ScalarProperty Name="Avatar" ColumnName="Avatar" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

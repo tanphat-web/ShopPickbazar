@@ -23,20 +23,20 @@ namespace ShopPickbazar.Admin
                int id = Convert.ToInt32(Request.QueryString["id"]);
                 var productDetail = db.PRODUCTS
                     .Where(x=> x.Id == id)
-                    .ToList();
-                var product = productDetail.Select(x => new
-                {
-                    x.Id,
-                    x.FeaturedImage,
-                    x.ProductName,
-                    x.Price,
-                    x.Discount,
-                    x.Quantity,
-                    x.DESCRIPTION,
-                    categoryName = x.CATEGORy.category_name,
-                    gallery = x.Images.Split(',').ToList(),
-                }).ToList();
-                repeaterProductDetail.DataSource = product;
+                    .ToList()
+                    .Select(x=> new
+                    {
+                        x.Id,
+                        x.FeaturedImage,
+                        x.ProductName,
+                        x.Price,
+                        x.Discount,
+                        x.Quantity,
+                        x.DESCRIPTION,
+                        categoryName = x.CATEGORy.category_name,
+                        gallery = x.Images.Split(',').ToList(),
+                    });
+                repeaterProductDetail.DataSource = productDetail;
                 repeaterProductDetail.DataBind();
             }
         }

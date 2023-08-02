@@ -67,8 +67,9 @@ function hideMenuFiters() {
   menuFilter.classList.remove("active");
   document.body.classList.remove("active");
 }
-
-document.querySelector("#auth").addEventListener("click", () => {
+const buttonAuth = document.querySelector("#auth");
+buttonAuth && buttonAuth.addEventListener("click", (e) => {
+    e.preventDefault();
   document.getElementById("formLogin").classList.add("active");
   document.body.classList.toggle("active");
 });

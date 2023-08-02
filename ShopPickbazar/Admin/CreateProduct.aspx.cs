@@ -29,7 +29,6 @@ namespace ShopPickbazar.Admin
                     ListCategory.DataValueField = "Id";
                     ListCategory.DataBind();
 
-
                 }
             }
         }
@@ -82,7 +81,7 @@ namespace ShopPickbazar.Admin
                    FeaturedImage =   featuredImageFileName,
                    Images = string.Join(",",galleryPaths),
                    DESCRIPTION = productDescription,
-                   Price = productPrice,
+                   Price = productPrice,    
                    Discount = productSalePrice,
                    Quantity = productQuantity,
                    

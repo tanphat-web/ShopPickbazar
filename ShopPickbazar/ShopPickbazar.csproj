@@ -51,6 +51,9 @@
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -77,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AddProductToCart.aspx" />
     <Content Include="Admin\CreateProduct.aspx" />
     <Content Include="Admin\css\sb-admin-2.css" />
     <Content Include="Admin\css\sb-admin-2.min.css" />
@@ -92,11 +96,9 @@
     <Content Include="Admin\js\sb-admin-2.js" />
     <Content Include="Admin\js\sb-admin-2.min.js" />
     <Content Include="Admin\Login.aspx" />
-    <Content Include="Admin\login.html" />
+    <Content Include="Admin\Order.aspx" />
     <Content Include="Admin\ProductDetail.aspx" />
     <Content Include="Admin\Products.aspx" />
-    <Content Include="Admin\register.html" />
-    <Content Include="Admin\tables.html" />
     <Content Include="Admin\UpdateProduct.aspx" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1767,12 +1769,71 @@
     <Content Include="Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="Checkout.aspx" />
     <Content Include="Content\CSS\input.css" />
     <Content Include="Content\CSS\output.css" />
     <Content Include="Content\CSS\styles.css" />
     <Content Include="Content\Images\avatar.svg" />
     <Content Include="Content\Images\grocery.png" />
+    <Content Include="Content\Images\no-result.b574bcc9.svg" />
     <Content Include="Content\Images\PickBazar.png" />
+    <Content Include="Content\Images\Products\apple-1-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\apple-2-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\apple-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\Apples.jpg" />
+    <Content Include="Content\Images\Products\baby-spinach-1-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\baby-spinach-1.png" />
+    <Content Include="Content\Images\Products\baby-spinach-2-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\baby-spinach-2.png" />
+    <Content Include="Content\Images\Products\baby-spinach.png" />
+    <Content Include="Content\Images\Products\BabySpinach.jpg" />
+    <Content Include="Content\Images\Products\BabySpinach_xronqz.jpg" />
+    <Content Include="Content\Images\Products\beef_xkxhnb %281%29.jpg" />
+    <Content Include="Content\Images\Products\beef_xkxhnb.jpg" />
+    <Content Include="Content\Images\Products\Bluberries-2-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\Bluberries-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\blueberries.jpg" />
+    <Content Include="Content\Images\Products\blueberries_relyfn-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\Brussels-Sprout-1-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\Brussels-Sprout-2-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\Brussels-Sprout-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\BrusselsSprouts.jpg" />
+    <Content Include="Content\Images\Products\BrusselsSprouts_adwhet-thumbnail.jpg" />
+    <Content Include="Content\Images\Products\CelerySticks.jpg" />
+    <Content Include="Content\Images\Products\chicken_brest_ribcxo %281%29.jpg" />
+    <Content Include="Content\Images\Products\chicken_brest_ribcxo.jpg" />
+    <Content Include="Content\Images\Products\chicken_thigh_yrdfwh %281%29.jpg" />
+    <Content Include="Content\Images\Products\chicken_thigh_yrdfwh.jpg" />
+    <Content Include="Content\Images\Products\clementines.jpg" />
+    <Content Include="Content\Images\Products\codfillet_u0mti1 %281%29.jpg" />
+    <Content Include="Content\Images\Products\codfillet_u0mti1.jpg" />
+    <Content Include="Content\Images\Products\Corn.jpg" />
+    <Content Include="Content\Images\Products\Cucumber.jpg" />
+    <Content Include="Content\Images\Products\Dates.jpg" />
+    <Content Include="Content\Images\Products\FrenchGreenBeans.jpg" />
+    <Content Include="Content\Images\Products\GreenBeans.jpg" />
+    <Content Include="Content\Images\Products\GreenLimes.jpg" />
+    <Content Include="Content\Images\Products\halibut_jaz7ju %281%29.jpg" />
+    <Content Include="Content\Images\Products\halibut_jaz7ju.jpg" />
+    <Content Include="Content\Images\Products\Mangoes.jpg" />
+    <Content Include="Content\Images\Products\MiniPeppers.jpg" />
+    <Content Include="Content\Images\Products\pears.jpg" />
+    <Content Include="Content\Images\Products\Peeled-Carrots.jpg" />
+    <Content Include="Content\Images\Products\RedCherries.jpg" />
+    <Content Include="Content\Images\Products\SignatureSalmon_fstp4m %281%29.jpg" />
+    <Content Include="Content\Images\Products\SignatureSalmon_fstp4m.jpg" />
+    <Content Include="Content\Images\Products\sliced_turkey_breast_szb8jg %281%29.jpg" />
+    <Content Include="Content\Images\Products\sliced_turkey_breast_szb8jg.jpg" />
+    <Content Include="Content\Images\Products\steak_okxpjo %281%29.jpg" />
+    <Content Include="Content\Images\Products\steak_okxpjo.jpg" />
+    <Content Include="Content\Images\Products\strawberry.jpg" />
+    <Content Include="Content\Images\Products\swordfish_smniuv %281%29.jpg" />
+    <Content Include="Content\Images\Products\swordfish_smniuv.jpg" />
+    <Content Include="Content\Images\Products\TilapiaFillet_a2urhk %281%29.jpg" />
+    <Content Include="Content\Images\Products\TilapiaFillet_a2urhk.jpg" />
+    <Content Include="Content\Images\Products\VeggiePlatter.jpg" />
+    <Content Include="Content\Images\Products\Yellow-Limes.jpg" />
+    <Content Include="Content\JavaScript\cart.js" />
     <Content Include="Content\JavaScript\main.js" />
     <Content Include="Content\Plugin\flickity.css" />
     <Content Include="Content\Plugin\flickity.pkgd.min.js" />
@@ -1788,9 +1849,17 @@
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
       <LastGenOutput>PickbazarModel.cs</LastGenOutput>
     </Content>
+    <Content Include="ProductDetail.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProductToCart.aspx.cs">
+      <DependentUpon>AddProductToCart.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AddProductToCart.aspx.designer.cs">
+      <DependentUpon>AddProductToCart.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\CreateProduct.aspx.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1819,6 +1888,13 @@
     <Compile Include="Admin\Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\Order.aspx.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Order.aspx.designer.cs">
+      <DependentUpon>Order.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ProductDetail.aspx.cs">
       <DependentUpon>ProductDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1840,6 +1916,13 @@
     <Compile Include="Admin\UpdateProduct.aspx.designer.cs">
       <DependentUpon>UpdateProduct.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Checkout.aspx.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Checkout.aspx.designer.cs">
+      <DependentUpon>Checkout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Client.Master.cs">
       <DependentUpon>Client.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1860,6 +1943,12 @@
     <Compile Include="Models\CATEGORy.cs">
       <DependentUpon>PickbazarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ORDER.cs">
+      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ORDERDETAIL.cs">
+      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\PickbazarModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1878,9 +1967,21 @@
     <Compile Include="Models\PRODUCT.cs">
       <DependentUpon>PickbazarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>PickbazarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\USER.cs">
       <DependentUpon>PickbazarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Product.cs" />
+    <Compile Include="ProductDetail.aspx.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ProductDetail.aspx.designer.cs">
+      <DependentUpon>ProductDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ProductQuantity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2076,7 +2177,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

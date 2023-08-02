@@ -26,7 +26,10 @@ namespace ShopPickbazar.Models
         }
     
         public virtual DbSet<CATEGORy> CATEGORIES { get; set; }
+        public virtual DbSet<ORDERDETAIL> ORDERDETAILS { get; set; }
+        public virtual DbSet<ORDER> ORDERS { get; set; }
         public virtual DbSet<PRODUCT> PRODUCTS { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<USER> USERS { get; set; }
     }
 }

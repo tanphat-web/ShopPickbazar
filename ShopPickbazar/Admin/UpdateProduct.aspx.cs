@@ -23,13 +23,13 @@ namespace ShopPickbazar.Admin
                 if (int.TryParse(Request.QueryString["id"], out productId))
                 {
                     // Lấy chi tiết sản phẩm từ cơ sở dữ liệu và hiển thị thông tin chi tiết để chỉnh sửa
-                    LoadProductDetails();
+                    LoadProductDetail();
                 }
                 else Response.Redirect("Products.aspx");
             }
         }
 
-        private void LoadProductDetails()
+        private void LoadProductDetail()
         {
             var product = db.PRODUCTS.FirstOrDefault(x => x.Id == productId);
             if (product != null)

@@ -72,10 +72,10 @@
                     <asp:Repeater ID="myRepeater" runat="server">
                         <ItemTemplate>
                             <li class="py-3">
-                                <a href=" <%# Eval("category_slug") %>" class="flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors">
+                                <asp:HyperLink runat="server" CssClass="category_item flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors" NavigateUrl='<%#"Index.aspx?category=" + Eval("id").ToString() %>'>
                                     <%# Eval("category_icon") %>
                                     <span><%# Eval("category_name") %></span>
-                                </a>
+                                </asp:HyperLink>
                             </li>
                         </ItemTemplate>
 
@@ -108,45 +108,47 @@
             </div>
             <div class="w-full  px-4 pt-6 pb-8 lg:p-8">
                 <div class="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3">
-                    <article
-                        class="product-card cart-type-neon h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow">
-                        <a href="product-detail.html">
-                            <div
-                                class="relative pt-[56.25%] overflow-hidden flex h-48 w-auto cursor-pointer items-center justify-center sm:h-64">
-                                <img src="https://pickbazar-react.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F1%2FApples.jpg&w=1920&q=75"
-                                    alt="Apples"
-                                    class="absolute  top-0 left-0 w-full max-w-full h-full object-cover">
-                                <div
-                                    class="absolute top-3 right-3 rounded bg-[var(--color-accent)] px-1.5 text-xs font-semibold leading-6 text-white ltr:right-3 rtl:left-3 sm:px-2 md:top-4 md:px-2.5 ltr:md:right-4 rtl:md:left-4">
-                                    20%
-                                </div>
-                            </div>
-                        </a>
-                        <header class="p-3 md:p-6">
-                            <a href="product-detail.html">
-                                <div class="mb-2 flex items-center gap-2">
-                                    <span
-                                        class="text-sm font-semibold text-heading md:text-base">$1.60</span><del
-                                            class="text-xs text-muted ltr:ml-2 rtl:mr-2 md:text-sm">$2.00</del>
-                                </div>
-                                <h3 class="mb-4 truncate text-xs  md:text-sm">Apples
-                                </h3>
-                            </a>
-                            <div>
-                                <button
-                                    class="group flex h-7 w-full items-center justify-between rounded bg-gray-100 text-xs  transition-colors hover:border-green-700 hover:bg-[var(--color-accent)] hover:text-white focus:border-green-700 focus:bg-[var(--color-accent)] focus:text-white focus:outline-0 md:h-9 md:text-sm">
-                                    <span
-                                        class="flex-1">Add</span><span
-                                            class="grid h-7 w-7 place-items-center bg-gray-200 transition-colors duration-200 group-hover:bg-[var(--color-accent-hover)] group-focus:bg-[var(--color-accent-hover)] ltr:rounded-tr ltr:rounded-br rtl:rounded-tl rtl:rounded-bl md:h-9 md:w-9"><svg
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                                                class="h-4 w-4 stroke-2">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6">
-                                                </path>
-                                            </svg></span></button>
-                            </div>
-                        </header>
-                    </article>
+
+                    <asp:Repeater runat="server" ID="Products">
+                        <ItemTemplate>
+                            <article
+                                class="product-card cart-type-neon h-full transform overflow-hidden rounded border border-border-200 bg-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow">
+                                <asp:HyperLink runat="server" NavigateUrl='<%#"ProductDetail.aspx?id="  + Eval("Id")%>'>
+                                    <div
+                                        class="relative pt-[56.25%] overflow-hidden flex h-48 w-auto cursor-pointer items-center justify-center sm:h-64">
+                                        <img src="https://pickbazar-react.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F1%2FApples.jpg&w=1920&q=75"
+                                            alt="Apples"
+                                            class="absolute  top-0 left-0 w-full max-w-full h-full object-cover">
+                                        <asp:Image runat="server" ImageUrl='<%#"./Content/Images/Products/"  + Eval("FeaturedImage")%>' AlternateText='<%# Eval("ProductName")%>'   CssClass="absolute  top-0 left-0 w-full max-w-full h-full object-cover" />
+                                        
+                                    </div>
+                                </asp:HyperLink>
+                                <header class="p-3 md:p-6">
+                                <asp:HyperLink runat="server" NavigateUrl='<%#"ProductDetail.aspx?id="  + Eval("Id")%>'>
+
+                                        <div class="mb-2 flex items-center gap-2">
+                                            <span
+                                                class="text-sm font-semibold text-heading md:text-base">
+                                                <%# string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),"{0:c0}", Convert.ToDecimal(Eval("Price"))) %>
+                                            </span>
+                                        </div>
+                                        <h3 class="mb-4 truncate text-xs  md:text-sm"><%#Eval("ProductName") %>
+                                        </h3>
+                                    </asp:HyperLink>
+                                        <button data-name="<%#Eval("ProductName")%>" data-image="<%#Eval("FeaturedImage")%>" data-price="<%#Eval("Price")%>" data-id="<%#Eval("Id")%>" type="button"
+                                            class="add-to-cart group flex h-7 w-full items-center justify-center rounded bg-gray-100 text-xs  transition-colors hover:border-green-700 hover:bg-[var(--color-accent)] hover:text-white focus:border-green-700 focus:bg-[var(--color-accent)] focus:text-white focus:outline-0 md:h-9 md:text-sm">
+                                            Thêm vào giỏ
+                                        </button>
+                                    <%--<asp:Button runat="server" ID="AddToCartButton" Text="Thêm vào giỏ hàng" OnClick='<%# "addToCart(" + Eval("Id") + "); return false;" %>' CssClass="add-to-cart group flex h-7 w-full items-center justify-center rounded bg-gray-100 text-xs  transition-colors hover:border-green-700 hover:bg-[var(--color-accent)] hover:text-white focus:border-green-700 focus:bg-[var(--color-accent)] focus:text-white focus:outline-0 md:h-9 md:text-sm"/>--%>
+                                   
+                                </header>
+                            </article>
+                        </ItemTemplate>
+                    </asp:Repeater>
+
+                </div>
+                <div style="display:flex;align-items:center; justify-content:center; flex-direction:column;">
+                    <asp:Image runat="server" ID="noProductFound" ImageUrl="./Content/Images/no-result.b574bcc9.svg" />
                 </div>
                 <!-- <div class="loadMore py-6 mx-auto flex items-center justify-center">
                         <button
@@ -158,43 +160,61 @@
 
     </main>
     <nav id="menu-filter"
-            class=" fixed top-0 left-0 w-screen h-screen z-[90] duration-300 opacity-0 pointer-events-none ">
-            <div
-                class="absolute bg-white h-full w-screen max-w-md shadow-xl z-50  -translate-x-full transition-transform duration-300 menu-wrapper">
-                <div class="py-5 px-5 flex items-center justify-between border-b">
-                    <a href="" class="inline-block max-w-[150px]"><img src="./Content/Images/PickBazar.png" alt=""></a>
-                    <button title="Close" type="button"
-                        class=" btnClose flex h-7 w-7 items-center justify-center align-middle rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0"><svg
-                            class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
-                            fill="currentColor">
-                            <path fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg></button>
-                </div>
-                <ul class="px-6 py-4 font-semibold w-full ">
-                    <asp:Repeater ID="categoriesMb" runat="server">
-                        <ItemTemplate>
-                            <li class="py-3">
-                                <a href=" <%# Eval("category_slug") %>" class="flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors">
+        class=" fixed top-0 left-0 w-screen h-screen z-[90] duration-300 opacity-0 pointer-events-none ">
+        <div
+            class="absolute bg-white h-full w-screen max-w-md shadow-xl z-50  -translate-x-full transition-transform duration-300 menu-wrapper">
+            <div class="py-5 px-5 flex items-center justify-between border-b">
+                <a href="/" class="inline-block max-w-[150px]">
+                    <img src="./Content/Images/PickBazar.png" alt=""></a>
+                <button title="Close" type="button"
+                    class=" btnClose flex h-7 w-7 items-center justify-center align-middle rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0">
+                    <svg
+                        class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"
+                        fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd">
+                        </path>
+                    </svg></button>
+            </div>
+            <ul class="px-6 py-4 font-semibold w-full ">
+                <asp:Repeater ID="categoriesMb" runat="server">
+                    <ItemTemplate>
+                        <li class="py-3">
+
+                            <asp:HyperLink runat="server" CssClass="category_item flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors" NavigateUrl='<%#"Index.aspx?category=" + Eval("id").ToString() %>'>
                                     <%# Eval("category_icon") %>
                                     <span><%# Eval("category_name") %></span>
-                                </a>
-                            </li>
-                        </ItemTemplate>
+                            </asp:HyperLink>
+                        </li>
+                    </ItemTemplate>
 
-                    </asp:Repeater>
-                </ul>
-            </div>
-            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
-            </div>
-        </nav>
+                </asp:Repeater>
+            </ul>
+        </div>
+        <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+        </div>
+    </nav>
+    
     <script>
         document.querySelector('header.site-header').classList.remove('bg-white')
     </script>
     <style>
-        #Categories svg, #menu-filter ul li svg  {
-            width:1rem;
+        #Categories svg, #menu-filter ul li svg {
+            width: 1rem;
+        }
+
+        .category_item.active {
+            color: var(--color-accent);
         }
     </style>
+    <script>
+        const categories = document.querySelectorAll(".category_item")
+        categories.forEach(item => {
+            if (item.href === location.href) {
+                item.className = "category_item active flex items-center gap-3 hover:text-[var(--color-accent)] transition-colors";
+            }
+
+        })
+    </script>
 </asp:Content>
