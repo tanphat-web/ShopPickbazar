@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Client.master.cs" Inherits="ShopPickbazar.Client" %>
-
+<%@ Register TagPrefix="uc" TagName="ButtonProfile" Src="~/Controls/ButtonProfile.ascx" %>
 <!DOCTYPE html>
 
 <html>
@@ -20,7 +20,7 @@
                     class="flex h-14 w-full transform-gpu items-center justify-between border-b border-border-200 bg-white px-4 py-5 shadow-sm transition-transform duration-300 md:h-16 lg:h-22 lg:px-8 lg:absolute lg:border-0 lg:bg-transparent lg:shadow-none">
                     <div class="logo lg:mx-0 mx-auto">
                         <a href="/" class="max-w-[150px] overflow-hidden inline-block">
-                           <img src="./Content/Images/PickBazar.png" alt="" class="w-full">
+                            <img src="./Content/Images/PickBazar.png" alt="" class="w-full">
                         </a>
                     </div>
                     <div class="search w-full max-w-3xl hidden lg:block relative opacity-0 pointer-events-none transition">
@@ -36,51 +36,17 @@
                     </div>
                     <ul class=" items-center gap-6 hidden lg:flex">
                         <li>
-                            <a href="/" class="text-base transition hover:text-[var(--color-accent)]">Shop</a>
-                        </li>
-                        <li>
-                            <a href="/" class="text-base transition hover:text-[var(--color-accent)]">Offers</a>
-                        </li>
-                        <li>
-                            <a href="/" class="text-base transition hover:text-[var(--color-accent)]">FAQ</a>
-                        </li>
-                        <li>
-                            <a href="/" class="text-base transition hover:text-[var(--color-accent)]">Contact</a>
+                            <a href="/" class="text-base transition hover:text-[var(--color-accent)]">Liên hệ</a>
                         </li>
                         <asp:Literal ID="lAuth" runat="server">
-                            <li id="auth">
+                            <li class="auth" id="auth">
                                 <button type="button" class="text-white text-base bg-[var(--color-accent)]  hover:bg-[var(--color-accent-hover)] rounded-md px-2 py-1 cursor-pointer">
                                     Đăng nhập
                                 </button>
                             </li>
                         </asp:Literal>
-                        <asp:Literal runat="server" ID="lProfile" >
-                            <li class="profile relative">
-                                <button type="button" class="w-9 h-9 rounded-full overflow-hidden border">
-                                    <img src="./Content/Images/avatar.svg" alt="avatar">
-                                </button>
-                                <ul
-                                    class="profile-menu absolute top-full right-0 bg-white w-[200px] block transition duration-300 opacity-0 pointer-events-none">
-                                    <li>
-                                        <a href=""
-                                            class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Profile</a>
-                                    </li>
-                                    <li>
-                                        <a href=""
-                                            class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">My
-                                            Order</a>
-                                    </li>
-                                    <li>
-                                        <a href=""
-                                            class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Checkout</a>
-                                    </li>
-                                    <li>
-                                       <a href="?action=logout"
-                                            class="pl-4 py-3 block transition font-semibold text-sm hover:text-[var(--color-accent)]">Checkout</a>
-                                    </li>
-                                </ul>
-                            </li>   
-                        </asp:Literal>
+                        <uc:ButtonProfile runat="server" id="ButtonProfile"  />
+
                     </ul>
                 </div>
             </header>
@@ -144,7 +110,8 @@
                         </svg>
                     </button>
                 </li>
-                <li>
+                <asp:Literal  runat="server" ID="literalLogin">
+                    <li>
                     <button type="button" class="hover:text-[var(--color-accent)] btn-group transition" title="Login"
                         data-button="formLogin">
                         <svg width="16.577" height="18.6" viewBox="0 0 16.577 18.6">
@@ -158,6 +125,23 @@
                         </svg>
                     </button>
                 </li>
+                </asp:Literal>
+                <asp:Literal runat="server" ID="literalprofile" >
+                    <li>
+                    <a href="Profile.aspx" class="hover:text-[var(--color-accent)] btn-group transition" title="Login"
+                        >
+                        <svg width="16.577" height="18.6" viewBox="0 0 16.577 18.6">
+                            <g transform="translate(-95.7 -121.203)">
+                                <path
+                                    d="M-7722.37,2933a.63.63,0,0,1-.63-.63c0-4.424,2.837-6.862,7.989-6.862s7.989,2.438,7.989,6.862a.629.629,0,0,1-.63.63Zm.647-1.251h13.428c-.246-3.31-2.5-4.986-6.713-4.986s-6.471,1.673-6.714,4.986Zm2.564-12.518a4.1,4.1,0,0,1,1.172-3,4.1,4.1,0,0,1,2.979-1.229,4.1,4.1,0,0,1,2.979,1.229,4.1,4.1,0,0,1,1.171,3,4.341,4.341,0,0,1-4.149,4.5,4.344,4.344,0,0,1-4.16-4.5Zm1.251,0a3.1,3.1,0,0,0,2.9,3.254,3.094,3.094,0,0,0,2.9-3.253,2.878,2.878,0,0,0-.813-2.109,2.88,2.88,0,0,0-2.085-.872,2.843,2.843,0,0,0-2.1.856,2.841,2.841,0,0,0-.806,2.122Z"
+                                    transform="translate(7819 -2793.5)" fill="currentColor" stroke="currentColor"
+                                    stroke-width="0.6">
+                                </path>
+                            </g>
+                        </svg>
+                    </a>
+                </li>
+                </asp:Literal>
             </ul>
         </nav>
         <nav id="menu-mobile"
@@ -196,7 +180,7 @@
             <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
             </div>
         </nav>
-            <div id="formLogin"
+        <div id="formLogin"
             class="fixed top-0 left-0 w-full h-screen z-[90] flex items-center justify-center p-4 opacity-0 pointer-events-none transition-opacity duration-300">
             <div class="max-w-lg w-full bg-white rounded-xl py-8 px-4 mx-auto relative z-50 ">
                 <div class="flex items-center">
@@ -224,7 +208,7 @@
                 <div class="pt-4 form-group">
                     <label for="Password" class="flex items-center justify-between mb-1">
                         <span class="block ">Mật khẩu:</span>
-                        <a href="ForgotPassword.aspx" class="text-sm text-accent hover:text-[var(--color-accent)]-hover underline">Quên mật khẩu?</a>
+                        <button type="button" data-button="formForgot" class="btn-auth text-accent hover:text-[var(--color-accent)]-hover">Quên mật khẩu?</button>
                     </label>
                     <div class="relative" id="pw">
                         <asp:TextBox runat="server" ID="txtPassword" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào mật khẩu" TextMode="Password"></asp:TextBox>
@@ -252,11 +236,123 @@
                     </div>
                 </div>
                 <div class="form-group pt-4">
-                    <asp:Button runat="server" ID="ButtonLogin" CssClass="cursor-pointer w-full bg-[var(--color-accent)] text-white p-2 rounded-lg hover:bg-[var(--color-accent-hover)]" Text="Đăng nhập" OnClick="ButtonLogin_Click"/>
+                    <asp:Button runat="server" ID="ButtonLogin" CssClass="cursor-pointer w-full bg-[var(--color-accent)] text-white p-2 rounded-lg hover:bg-[var(--color-accent-hover)]" Text="Đăng nhập" OnClick="ButtonLogin_Click" />
                 </div>
                 <div class="form-group pt-4 flex items-center gap-[3px] justify-center">
                     <p class="text-center text-sm sm:text-base">Chưa có tài khoản?</p>
-                    <a href="Register.aspx" class="text-accent hover:text-[var(--color-accent)]-hover">Đăng ký</a>
+                    <button type="button" data-button="FormRegister" class="btn-auth text-accent hover:text-[var(--color-accent)]-hover">Đăng ký</button>
+                </div>
+            </div>
+            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+            </div>
+        </div>
+        <div id="FormRegister"
+            class="fixed top-0 left-0 w-full h-screen z-[90] flex items-center justify-center p-4 hidden transition-opacity duration-300">
+            <div class="max-w-lg w-full bg-white rounded-xl py-8 px-4 mx-auto relative z-50 ">
+                <div class="flex items-center">
+                    <a href="/" class=" mx-auto max-w-[120px] inline-block">
+                        <img src="./Content/Images/PickBazar.png" alt="" class="">
+                    </a>
+                </div>
+                <button title="Close" type="button"
+                    class="btnClose absolute top-3 right-2 h-7 w-7 flex items-center justify-center rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0">
+                    <svg
+                        class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </button>
+                <p class="p-5 text-center ">Đăng ký tài khoản</p>
+                <div class="form-group">
+                    <label for="Email">
+                        <span class="block mb-1">Họ và tên</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtFullName" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào họ tên"></asp:TextBox>
+                </div>
+                <div class="form-group pt-4">
+                    <label for="Email">
+                        <span class="block mb-1">Email</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtEmailRegister" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào Email"></asp:TextBox>
+                </div>
+                <div class="form-group pt-4">
+                    <label for="Email">
+                        <span class="block mb-1">Số điện thoại</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtPhoneRegister" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào Email"></asp:TextBox>
+                </div>
+                <%--<div class="form-group pt-4">
+                    <label for="Email">
+                        <span class="block mb-1">Ngày sinh</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtDateTimeRegister" CssClass="w-full border p-2 rounded-lg" TextMode="DateTimeLocal"></asp:TextBox>
+                </div>--%>
+                <div class="form-group pt-4">
+                    <label for="">
+                        <span class="block mb-1">Tên tài khoản</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtUsernameRegister" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào tài khoản"></asp:TextBox>
+                </div>
+                <div class="pt-4 form-group">
+                    <label for="Password" class="flex items-center justify-between mb-1">
+                        <span class="block ">Mật khẩu:</span>
+                    </label>
+                    <div>
+                        <asp:TextBox runat="server" ID="txtPasswordRegister" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào mật khẩu" TextMode="Password"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group pt-4">
+                    <asp:Button runat="server" ID="ButtonRegister" OnClick="ButtonRegister_Click" CssClass="cursor-pointer w-full bg-[var(--color-accent)] text-white p-2 rounded-lg hover:bg-[var(--color-accent-hover)]" Text="Đăng ký" />
+                </div>
+                <div class="form-group pt-4 flex items-center gap-[3px] justify-center">
+                    <p class="text-center text-sm sm:text-base">Đã có tài khoản?</p>
+                    <button type="button" class="btn-prev text-accent hover:text-[var(--color-accent)]-hover">Đăng nhập</button>
+                </div>
+            </div>
+            <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
+            </div>
+        </div>
+        <div id="formForgot"
+            class="fixed top-0 left-0 w-full h-screen z-[90] hidden flex items-center justify-center p-4  transition-opacity duration-300">
+            <div class="max-w-lg w-full bg-white rounded-xl py-8 px-4 mx-auto relative z-50 ">
+                <div class="flex items-center">
+                    <a href="/" class=" mx-auto max-w-[120px] inline-block">
+                        <img src="./Content/Images/PickBazar.png" alt="" class="">
+                    </a>
+                </div>
+                <button title="Close" type="button"
+                    class="btnClose absolute top-3 right-2 h-7 w-7 flex items-center justify-center rounded-full bg-gray-200  transition-all duration-200 hover:bg-[var(--color-accent)] hover:text-white focus:bg-[var(--color-accent)] focus:text-white focus:outline-0">
+                    <svg
+                        class="h-2.5 w-2.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd">
+                        </path>
+                    </svg>
+                </button>
+                <p class="p-5 text-center ">Quên mật khẩu</p>
+                <div class="form-group pt-4">
+                    <label for="Email">
+                        <span class="block mb-1">Email</span>
+                    </label>
+                    <asp:TextBox runat="server" ID="txtEmailForgot" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào tài khoản"></asp:TextBox>
+                </div>
+                <div class="pt-4 form-group">
+                    <label for="Password" class="flex items-center justify-between mb-1">
+                        <span class="block ">Mật khẩu mới:</span>
+                    </label>
+                    <div>
+                        <asp:TextBox runat="server" ID="txtPasswordForgot" CssClass="w-full border p-2 rounded-lg" placeholder="Nhập vào mật khẩu mới" TextMode="Password"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="form-group pt-4">
+                    <asp:Button runat="server" ID="BtnForgot" CssClass="cursor-pointer w-full bg-[var(--color-accent)] text-white p-2 rounded-lg hover:bg-[var(--color-accent-hover)]" OnClick="BtnForgot_Click" Text="Xác nhận" />
+                </div>
+                <div class="form-group pt-4 flex items-center gap-[3px] justify-center">
+                    <p class="text-center text-sm sm:text-base">Đã có tài khoản?</p>
+                    <button type="button" class="btn-prev text-accent hover:text-[var(--color-accent)]-hover">Đăng nhập</button>
                 </div>
             </div>
             <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
@@ -326,14 +422,21 @@
                             $0.00
                         </span>
                     </asp:LinkButton>
-                   
-                        
+                    <asp:LinkButton runat="server" ID="BtnLogin" CssClass=" auth flex h-12 w-full justify-between rounded-full bg-[var(--color-accent)] p-1 text-sm font-bold shadow-700 transition-colors hover:bg-[var(--color-accent-hover)] focus:bg-[var(--color-accent-hover)] focus:outline-0 md:h-14">
+                        <span
+                            class="flex h-full flex-1 items-center px-5 text-white">
+                            Thanh toán
+                        </span>
+                        <span class=" totalPrice flex h-full shrink-0 items-center rounded-full bg-white px-5 text-accent">
+                            $0.00
+                        </span>
+                    </asp:LinkButton>
                 </footer>
             </div>
             <div class=" fixed w-full h-screen top-0 left-0 z-40 overlay" style="background-color: rgba(0, 0, 0, 0.7);">
             </div>
         </div>
-        
+
         <button type="button" id="product-cart"
             class=" fixed top-1/2 right-0 z-40 -mt-12 hidden flex-col items-center justify-center rounded bg-[var(--color-accent)] p-3 pt-3.5 text-sm font-semibold text-white shadow-900 transition-colors duration-200 hover:bg-[var(--color-accent-hover)] focus:outline-0 ltr:right-0 ltr:rounded-tr-none ltr:rounded-br-none rtl:left-0 rtl:rounded-tl-none rtl:rounded-bl-none lg:flex">
             <span
@@ -357,25 +460,30 @@
                             </g>
                         </g>
                     </g>
-                    
+
                 </svg><span class=" flex ltr:ml-2 rtl:mr-2 product-quantity">2 Sản phẩm</span></span><span
                     class="totalPrice mt-3 w-full rounded bg-white px-2 py-2 text-accent"></span></button>
-   <asp:HiddenField runat="server" ID="hiddenCart" Value="" />
-        </form>
-    <script src="./Content/Plugin/flickity.pkgd.min.js"></script>
+        <asp:HiddenField runat="server" ID="hiddenCart" Value="" />
+        <div id="toast">
+        </div>
+    </form>
+    <script src="./Content/Plugin/flickity.pkgd.min.js">
+
+    </script>
     <script>
-        
         const carousel = document.querySelector('.carousel');
-        const flkty = new Flickity(carousel, {
-            // options
-            cellAlign: 'left',
-            contain: true,
-            pageDots: false,
-            prevNextButtons: true,
-            autoPlay: 1500,
-            pauseAutoPlayOnHover: true,
-            prevNextButtons: false
-        });
+        if (carousel != null) {
+            const flkty = new Flickity(carousel, {
+                // options
+                cellAlign: 'left',
+                contain: true,
+                pageDots: false,
+                prevNextButtons: true,
+                autoPlay: 1500,
+                pauseAutoPlayOnHover: true,
+                prevNextButtons: false
+            });
+        }
     </script>
     <script src="./Content/JavaScript/main.js"></script>
     <script src="./Content/JavaScript/cart.js"> </script>

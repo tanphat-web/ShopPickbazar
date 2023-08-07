@@ -1,6 +1,8 @@
-﻿using ShopPickbazar.Models;
+﻿using ShopPickbazar.Controls;
+using ShopPickbazar.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Common.CommandTrees;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -23,25 +25,25 @@ namespace ShopPickbazar
             {
                 Response.Redirect("index.aspx");
             }
-           
         }
 
         protected void ButtonLogin_Click(object sender, EventArgs e)
         {
             string username = txtAccount.Text;
             string password = txtPassword.Text;
-            var user = db.USERS.FirstOrDefault(u=> u.UserName == username && u.Password == password); 
-            if(user != null)
+            LogIn(username, password);
+        }
+        protected void BtnForgot_Click(object sender, EventArgs e)
+        {
+            string email = txtEmailForgot.Text;
+            string password = txtPasswordForgot.Text;
+            
+            var query = db.USERS.FirstOrDefault(x => x.Email == email);
+            if(query != null)
             {
-                // Đăng nhập thành công, tạo và lưu cookie
-
-                HttpCookie loginCookie = new HttpCookie("LoginCookie");
-                loginCookie["UserId"] = user.Id.ToString();
-                loginCookie["UserName"] = user.UserName.ToString();
-                loginCookie.Expires = DateTime.Now.AddMinutes(30);
-                Response.Cookies.Add(loginCookie);
-                Response.Redirect("/");
+                query.Password = password;
             }
+            db.SaveChanges();
         }
         void Logout()
         {
@@ -62,31 +64,72 @@ namespace ShopPickbazar
                 }
             }
         }
+      
         void CheckLoggedIn()
         {
             if(Request.Cookies["LoginCookie"] != null)
             {
-                lProfile.Visible = true;
+                ButtonProfile.Visible = true;
                 lAuth.Visible = false;
-            }else
+                BtnLogin.Visible = false;
+                ButtonCheckout.Visible = true;
+                literalprofile.Visible=true;
+                literalLogin.Visible = false;
+            }
+            else
             {
-                lProfile.Visible = false;
+                ButtonProfile.Visible = false;
                 lAuth.Visible = true;
+                BtnLogin.Visible = true;
+                ButtonCheckout.Visible = false;
+                literalprofile.Visible = false;
+                literalLogin.Visible = true;
             }
         }
 
-       
+        protected void ButtonRegister_Click(object sender, EventArgs e)
+        {
+            string fullName = txtFullName.Text;
+            string Email = txtEmailRegister.Text;
+            int phone = int.Parse(txtPhoneRegister.Text);
+            //string date = txtDateTimeRegister.Text;
+            string userName = txtUsernameRegister.Text;
+            string password = txtPasswordRegister.Text;
+            var query = db.USERS.FirstOrDefault(x=> x.Email != Email && x.PhoneNumber != phone);
+            USER user = new USER
+            {
+                UserName = userName,
+                Password = password,
+                Email = Email,
+                FullName = fullName,
+                Position = "user",
+            };
+            db.USERS.Add(user);
+            LogIn(userName,password);
+            db.SaveChanges();
+            Response.Redirect(HttpContext.Current.Request.Url.ToString());
+        }
+
         protected void ButtonCheckOutClick(object sender, EventArgs e)
         {
-            if (Request.Cookies["LoginCookie"] != null)
-            {
                 Response.Redirect("Checkout.aspx");
-                
-            }else
+        }
+        void LogIn(string username, string password)
+        {
+
+            var user = db.USERS.FirstOrDefault(u => u.UserName == username && u.Password == password);
+            if (user != null)
             {
-                Response.Redirect("Login.aspx");
+                // Đăng nhập thành công, tạo và lưu cookie
+
+                HttpCookie loginCookie = new HttpCookie("LoginCookie");
+                loginCookie["UserId"] = user.Id.ToString();
+                loginCookie["UserName"] = user.UserName.ToString();
+                loginCookie.Expires = DateTime.Now.AddDays(2);
+                Response.Cookies.Add(loginCookie);
+                Response.Redirect("/");
             }
         }
-        
+
     }
 }

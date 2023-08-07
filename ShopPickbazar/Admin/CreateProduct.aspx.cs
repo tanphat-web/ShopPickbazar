@@ -84,6 +84,7 @@ namespace ShopPickbazar.Admin
                    Price = productPrice,    
                    Discount = productSalePrice,
                    Quantity = productQuantity,
+                   Hide = false
                    
                 };
                 // Thêm sản phẩm mới vào bảng 'sanpham'

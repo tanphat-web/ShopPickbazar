@@ -10,7 +10,6 @@
                     <div class="card-header">Chi tiết sản phẩm</div>
                     <div class="card-body">
                         <div class="row">
-                           
                                     <div class="col-md-6 mb-3">
                                         <p>Hình ảnh nổi bật</p>
                                         <asp:FileUpload runat="server" ID="Image" CssClass="form-control" AllowMultiple="false" />

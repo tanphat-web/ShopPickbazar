@@ -42,11 +42,13 @@ header.site-header.active .search {
 #formInputSearch.active,
 #cart.active,
 #menu-filter.active,
-#formUpdatePhone.active,
+#menu-profile.active,
+#FormRegister.active,
 #formUpdateAddress.active,
+#formSignup.active,
 .profile-menu.active {
-  opacity: 1;
-  pointer-events: visible;
+    opacity: 1;
+    pointer-events: visible;
 }
 #menu-mobile.active .menu-wrapper,
 #menu-filter.active .menu-wrapper {

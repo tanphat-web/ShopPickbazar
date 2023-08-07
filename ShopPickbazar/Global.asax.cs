@@ -20,7 +20,7 @@ namespace ShopPickbazar
         private void RegisterRoutes(RouteCollection routes)
         {
             routes.MapPageRoute("ClientHomePage", "", "~/Index.aspx");
-            
+
         }
 
         protected void Session_Start(object sender, EventArgs e)

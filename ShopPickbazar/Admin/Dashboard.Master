@@ -33,7 +33,7 @@
 
                 <!-- Sidebar - Brand -->
                 <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index.aspx">
-                    <div class="sidebar-brand-icon rotate-n-15">
+                    <div class="sidebar-brand-icon rotate-n-15" />
                         <i class="fas fa-laugh-wink"></i>
                     </div>
                     <div class="sidebar-brand-text mx-3">SB Admin</div>
@@ -60,7 +60,8 @@
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
                             <a class="collapse-item" href="Products.aspx">Tất cả sản phẩm</a>
-                            <a class="collapse-item" href="ProductCategory.aspx">Danh mục sản phẩm</a>
+                            <a class="collapse-item" href="ProductCategories.aspx">Danh mục sản phẩm</a>
+                            <a class="collapse-item" href="ProductsTrash.aspx">Thùng rác</a>
                             <a class="collapse-item" href="CreateProduct.aspx">Thêm sản phẩm</a>
                         </div>
                     </div>
@@ -74,7 +75,7 @@
                     <div id="collapseCategories" class="collapse" aria-labelledby="headingPages"
                         data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <a class="collapse-item" href="">Tất cả danh mục</a>
+                            <a class="collapse-item" href="Categories.aspx">Tất cả danh mục</a>
                             <a class="collapse-item" href="">Thêm danh mục</a>
                         </div>
                     </div>

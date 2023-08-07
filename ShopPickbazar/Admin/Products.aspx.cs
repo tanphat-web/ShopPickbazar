@@ -22,24 +22,40 @@ namespace ShopPickbazar.Admin
         }
         protected void LoadProducts()
         {
+            int categoryId;
+            if (!String.IsNullOrEmpty(Request.QueryString["category"]))
+            {
+                categoryId = Convert.ToInt32(Request.QueryString["category"]);
+                var query = from product in db.PRODUCTS
+                            where product.CATEGORy.id == categoryId && product.Hide == false
+                            select product;
+                DisplayProducts(query);
 
-            var query = from product in db.PRODUCTS
-                        select new
-                        {
-                                product.Id,
-                                product.FeaturedImage,
-                                product.ProductName,
-                                price = product.Price,
-                                qt = product.Quantity,
-                                status = product.Quantity> 5 ? "Còn hàng" :(product.Quantity <=5 && product.Quantity > 0 ?"Sắp hết hàng" : "Hết hàng"),
-                                cssClass = product.Quantity > 5 ? "badge badge-success"  : (product.Quantity <= 5 && product.Quantity > 0 ? "badge badge-danger" : "badge badge-secondary"),
-                                product.Images,
-                                cateName = product.CATEGORy.category_name,
+            }else
+            {
+                var query = from product in db.PRODUCTS
+                            where product.Hide == false
+                            select product;
+                DisplayProducts(query);
+            }
+        }
+        void DisplayProducts(IQueryable<PRODUCT> query)
+        {
+            var products = query.Select(product => new
+            {
+                product.Id,
+                product.FeaturedImage,
+                product.ProductName,
+                price = product.Price,
+                qt = product.Quantity,
+                status = product.Quantity > 5 ? "Còn hàng" : (product.Quantity <= 5 && product.Quantity > 0 ? "Sắp hết hàng" : "Hết hàng"),
+                cssClass = product.Quantity > 5 ? "badge badge-success" : (product.Quantity <= 5 && product.Quantity > 0 ? "badge badge-danger" : "badge badge-secondary"),
+                product.Images,
+                cateName = product.CATEGORy.category_name,
+            });
 
-                            };
-            
-                dataProducts.DataSource = query.ToList();
-                dataProducts.DataBind();
+            dataProducts.DataSource = products.ToList();
+            dataProducts.DataBind();
         }
         protected void DeleteProduct()
         {
@@ -49,14 +65,12 @@ namespace ShopPickbazar.Admin
                 var deleteProduct = (from pd in db.PRODUCTS where pd.Id == id select pd).SingleOrDefault();
                 if (deleteProduct != null)
                 {
-                    db.PRODUCTS.Remove(deleteProduct);
+                    deleteProduct.Hide = true;
                     db.SaveChanges();
                     Response.Redirect("Products.aspx");
                 }
 
             }
         }
-
-       
     }
 }

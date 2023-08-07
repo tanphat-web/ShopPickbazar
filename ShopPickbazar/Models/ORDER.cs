@@ -25,6 +25,9 @@ namespace ShopPickbazar.Models
         public Nullable<System.DateTime> OrderDate { get; set; }
         public string Status { get; set; }
         public Nullable<int> UserId { get; set; }
+        public string Address { get; set; }
+        public string Note { get; set; }
+        public Nullable<bool> Payment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ORDERDETAIL> ORDERDETAILS { get; set; }

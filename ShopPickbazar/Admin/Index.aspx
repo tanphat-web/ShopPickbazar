@@ -118,96 +118,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-success p-0 px-2 w-100 mx-auto align-middle">Thành công
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-warning p-0 px-2 w-100 mx-auto align-middle">Đang xử lý
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-secondary p-0 px-2 w-100 mx-auto align-middle">Đã hủy
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-success p-0 px-2 w-100 mx-auto align-middle">Thành công
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-warning p-0 px-2 w-100 mx-auto align-middle">Đang xử lý
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-secondary p-0 px-2 w-100 mx-auto align-middle">Đã hủy
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-success p-0 px-2 w-100 mx-auto align-middle">Thành công
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-warning p-0 px-2 w-100 mx-auto align-middle">Đang xử lý
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2123</td>
-                                    <td>$55.10</td>
-                                    <td>8 months ago</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-secondary p-0 px-2 w-100 mx-auto align-middle">Đã hủy
-                                                        </span>
-                                    </td>
-                                </tr>
+
+                                <asp:Repeater runat="server" ID="recentOrders">
+                                    <ItemTemplate>
+                                        <tr>
+                                            <td><%#Eval("Id") %></td>
+                                            <td><%# string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),"{0:c0}", Convert.ToDecimal(Eval("TotalPrice"))) %></td>
+                                            <td><%#Eval("OrderDate","{0: dd/MM/yyyy h:mm:ss tt}")%></td>
+                                            <td class="d-flex items-center justify-content-between text-center">
+                                                <span class='<%#"p-0 px-2 w-100 mx-auto align-middle" + Eval("cssClass")%>' >
+                                                        <%#Eval("Status") %>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </tbody>
                         </table>
                     </div>
@@ -222,7 +147,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" width="100%" cellspacing="0"
-                            id="recent-orders">
+                            id="users">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -232,36 +157,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Lộ Phú Tấn Phát</td>
-                                    <td>admin@example.com</td>
-                                    <td class="">
+                                <asp:Repeater runat="server" ID="RpUsers">
+                                    <ItemTemplate>
+                                        <tr>
+                                    <td><%#Eval("Id") %></td>
+                                    <td><%# Eval("FullName") %></td>
+                                    <td><%# Eval("Email") %></td>
+                                    <td class="d-flex items-center justify-content-between text-center">
                                         <span
-                                            class="btn btn-secondary p-0 px-2 w-100 mx-auto align-middle">super admin
-                                                        </span>
+                                            class='<%#"p-0 px-2 w-100 mx-auto align-middle" + Eval("cssClass")%>'><%#Eval("Position") %>
+                                        </span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Lộ Phú Tấn Phát</td>
-                                    <td>admin@example.com</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-danger p-0 px-2 w-100 mx-auto align-middle">Admin
-                                                        </span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>11</td>
-                                    <td>Lộ Phú Tấn Phát</td>
-                                    <td>admin@example.com</td>
-                                    <td class="">
-                                        <span
-                                            class="btn btn-primary p-0 px-2 w-100 mx-auto align-middle">Khách hàng
-                                                        </span>
-                                    </td>
-                                </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </tbody>
                         </table>
                     </div>
@@ -278,7 +187,7 @@
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered" width="100%" cellspacing="0"
-                            id="recent-orders">
+                            id="products-popular">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -289,19 +198,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
+                                <asp:Repeater runat="server" ID="ProductsPopular">
+                                    <ItemTemplate>
+                                        <tr>
+                                    <td><%#Eval("Id") %></td>
                                     <td>
-                                        <img width="40" height="40"
-                                            src="https://pickbazar-react-admin.vercel.app/_next/image?url=https%3A%2F%2Fpickbazarlaravel.s3.ap-southeast-1.amazonaws.com%2F882%2Fconversions%2FFurniture-thumbnail.jpg&w=48&q=75"
-                                            alt="" style="overflow: hidden;">
-                                        <span>Quả táo nhà Phát trồng
-                                                        </span>
+                                        <asp:Image runat="server" ID="Image1" Height="40" Width="40" ImageUrl='<%#"../Content/Images/Products/" + Eval("FeaturedImage").ToString()%>' />
+
+                                        <span><%#Eval("ProductName") %>
+                                        </span>
                                     </td>
-                                    <td>Trái cây</td>
-                                    <td>30.000 VND</td>
-                                    <td>30</td>
+                                    <td><%#Eval("category_name") %></td>
+                                    <td><%# string.Format(System.Globalization.CultureInfo.GetCultureInfo("vi-VN"),"{0:c0}", Convert.ToDecimal(Eval("Price"))) %></td>
+                                    <td><%#Eval("Quantity") %></td>
                                 </tr>
+                                    </ItemTemplate>
+                                </asp:Repeater>
                             </tbody>
                         </table>
                     </div>

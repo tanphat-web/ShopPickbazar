@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="ShopPickbazar.Checkout" %>
+﻿    <%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Checkout.aspx.cs" Inherits="ShopPickbazar.Checkout" %>
 
 <!DOCTYPE html>
 
@@ -24,46 +24,27 @@
                         </div>
                         <div  style="padding-top:30px;">
                             <h3 class="mb-3">Thông tin giao hàng</h3>
-                            <input type="text" placeholder="Họ và tên"
-                                class="w-full rounded-lg p-2 px-3 mb-3 border  bg-transparent text-sm "
-                                style="outline-color: #cacaca;">
-                            <input type="text" placeholder="Email"
-                                class="w-full border rounded-lg p-2 px-3 mb-3 bg-transparent text-sm"
-                                style="outline-color: #cacaca;">
-                            <input type="text" placeholder="Số điện thoại"
-                                class="w-full border rounded-lg p-2 px-3 bg-transparent text-sm mb-3"
-                                style="outline-color: #cacaca;">
-                            <%--<div class="flex items-center gap-3 flex-wrap mb-3">
-                                <select name="" id=""
-                                    class="wl border rounded-lg p-2 px-3 bg-transparent text-sm ">
-                                    <option value="">Chọn tỉnh/ Thành phố</option>
-                                </select>
-                                <select name="" id=""
-                                    class="wl border rounded-lg p-2 px-3 bg-transparent text-sm ">
-                                    <option value="">Chọn tỉnh/ Thành phố</option>
-                                </select>
-                                <select name="" id=""
-                                    class="wl border rounded-lg p-2 px-3 bg-transparent text-sm ">
-                                    <option value="">Chọn tỉnh/ Thành phố</option>
-                                </select>
-                            </div>--%>
-                            <input type="text" placeholder="Địa chỉ"
-                                class="w-full border rounded-lg p-2 px-3 bg-transparent text-sm mb-3"
-                                style="outline-color: #cacaca;">
-                            <textarea name="" id="" rows="5" style="outline-color: #cacaca;" placeholder="Chú thích"
-                                class="w-full border rounded-lg p-2 px-3 bg-transparent mb-3 text-sm"></textarea>
+                            <asp:TextBox runat="server" ID="txtName" placeholder="Họ và tên" cssClass="w-full rounded-lg p-2 px-3 mb-3 border  bg-transparent text-sm "
+                                style="outline-color: #cacaca;"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtEmail" placeholder="Email" cssClass="w-full rounded-lg p-2 px-3 mb-3 border  bg-transparent text-sm "
+                                style="outline-color: #cacaca;"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="txtPhone" placeholder="Số điện thoại" cssClass="w-full rounded-lg p-2 px-3 mb-3 border  bg-transparent text-sm "
+                                style="outline-color: #cacaca;"></asp:TextBox>
+                             <asp:TextBox runat="server" ID="txtAddress" placeholder="Địa chỉ" cssClass="w-full rounded-lg p-2 px-3 mb-3 border  bg-transparent text-sm "
+                                style="outline-color: #cacaca;"></asp:TextBox>
+                            <asp:TextBox runat="server" ID="txtNote" TextMode="MultiLine" rows="5" style="outline-color: #cacaca;" placeholder="Ghi chú" cssClass="w-full border rounded-lg p-2 px-3 bg-transparent mb-3 text-sm"></asp:TextBox>
                         </div>
                         <div>
                             <h3 class="mb-3">Phương thức thanh toán</h3>
                             <div class="border rounded-lg">
                                 <div class="border-b p-2">
-                                    <input type="radio" id="a" value="a" name="checkout">
+                                    <input type="radio" id="a" class="checkPayment" value="1" name="checkout">
                                     <label class="text-sm" for="a">
                                         Thanh toán trực tuyến (VNPAY-QR, thẻ tín dụng, thẻ nội
                                     địa)</label>
                                 </div>
                                 <div class="p-2">
-                                    <input type="radio" id="b" value="b" name="checkout">
+                                    <input type="radio" class="checkPayment" id="b" value="2" name="checkout" checked>
                                     <label class="text-sm" for="b">Thanh toán khi nhận hàng</label>
                                 </div>
                             </div>
@@ -235,18 +216,27 @@
           
             try {
                 const cartItems = JSON.parse(localStorage.getItem("cart"));
+                const address = document.getElementById('txtAddress').value;
+                const note = document.getElementById('txtNote').value;
+                const methodPayment = document.querySelector('input[name="checkout"]:checked').value;
                 const response = await fetch("/AddProductToCart.aspx", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded; charset=utf-8"
                     },
-                    body: JSON.stringify({ cart: cartItems })
+                    body: JSON.stringify({
+                        cart: cartItems,
+                        address,
+                        note,
+                        methodPayment
+                    })
                 }); 
                 if (response.ok) {
                     // Xử lý phản hồi thành công ở đây
                     alert("Sản phẩm đã được thêm vào giỏ hàng thành công!");
 
                     localStorage.removeItem('cart');
+                    setTimeout(location.href = "/", 100);
                 } else {
                     // Xử lý lỗi ở đây
                     alert("Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng!");

@@ -17,15 +17,8 @@
                 </p>
                 <div class="w-full max-w-3xl">
                     <div class="search w-full flex items-center ">
-                        <input type="text" class=" focus:border-green-800 w-3/4 px-4 h-14 outline-green-700  "
-                            style="border-top-left-radius: 8px; border-bottom-left-radius: 8px;"
-                            placeholder="Search your products from here ">
-                        <button
-                            class="w-1/4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition text-white h-14  text-base flex items-center justify-center gap-1"
-                            style="border-top-right-radius: 8px; border-bottom-right-radius: 8px;">
-                            <i class='bx bx-search align-middle'></i>
-                            <span>Search</span>
-                        </button>
+                        <asp:TextBox runat="server" ID="txtSearch" placeholder="Tìm kiếm sản phẩm tại đây"  style="border-top-left-radius: 8px; border-bottom-left-radius: 8px;"  CssClass="focus:border-green-800 w-3/4 px-4 h-14 outline-green-700 "/>
+                        <asp:Button Text="Search" ID="ButtonSearch" OnClick="ButtonSearch_Click" runat="server" style="border-top-right-radius: 8px; border-bottom-right-radius: 8px;" CssClass="cursor-pointer w-1/4 bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition text-white h-14  text-base flex items-center justify-center gap-1" />
                     </div>
                 </div>
             </div>
@@ -63,7 +56,6 @@
                 </div>
             </div>
         </section>
-
         <section class="w-full block  lg:flex">
 
             <div style="height: calc(100vh - 68px);"
@@ -120,7 +112,8 @@
                                             alt="Apples"
                                             class="absolute  top-0 left-0 w-full max-w-full h-full object-cover">
                                         <asp:Image runat="server" ImageUrl='<%#"./Content/Images/Products/"  + Eval("FeaturedImage")%>' AlternateText='<%# Eval("ProductName")%>'   CssClass="absolute  top-0 left-0 w-full max-w-full h-full object-cover" />
-                                        
+                                        <div style="<%#Eval("cssStyle")%>" class="absolute top-3 right-3 rounded  px-1.5 text-xs font-semibold leading-6 text-white ltr:right-3 rtl:left-3 sm:px-2 md:top-4 md:px-2.5 ltr:md:right-4 rtl:md:left-4">
+                                        <%#Eval("status")%></div>
                                     </div>
                                 </asp:HyperLink>
                                 <header class="p-3 md:p-6">
@@ -135,7 +128,7 @@
                                         <h3 class="mb-4 truncate text-xs  md:text-sm"><%#Eval("ProductName") %>
                                         </h3>
                                     </asp:HyperLink>
-                                        <button data-name="<%#Eval("ProductName")%>" data-image="<%#Eval("FeaturedImage")%>" data-price="<%#Eval("Price")%>" data-id="<%#Eval("Id")%>" type="button"
+                                        <button data-name="<%#Eval("ProductName")%>" data-image="<%#Eval("FeaturedImage")%>" data-price="<%#Eval("Price")%>" data-id="<%#Eval("Id")%>" type="button" style="<%#Eval("cssClass")%>"
                                             class="add-to-cart group flex h-7 w-full items-center justify-center rounded bg-gray-100 text-xs  transition-colors hover:border-green-700 hover:bg-[var(--color-accent)] hover:text-white focus:border-green-700 focus:bg-[var(--color-accent)] focus:text-white focus:outline-0 md:h-9 md:text-sm">
                                             Thêm vào giỏ
                                         </button>
@@ -145,7 +138,7 @@
                             </article>
                         </ItemTemplate>
                     </asp:Repeater>
-
+                    
                 </div>
                 <div style="display:flex;align-items:center; justify-content:center; flex-direction:column;">
                     <asp:Image runat="server" ID="noProductFound" ImageUrl="./Content/Images/no-result.b574bcc9.svg" />
@@ -216,5 +209,20 @@
             }
 
         })
+
+        const btnFilters = document.getElementById("btn-filter");
+        const menuFilter = document.getElementById("menu-filter");
+        const buttonCloseMenuFilters = menuFilter.querySelector(".btnClose");
+        const menuFilterOverlay = menuFilter.querySelector(".overlay");
+        btnFilters.addEventListener("click", () => {
+            menuFilter.classList.add("active");
+            document.body.classList.add("active");
+        });
+        buttonCloseMenuFilters && buttonCloseMenuFilters.addEventListener("click", hideMenuFiters);
+        menuFilterOverlay.addEventListener("click", hideMenuFiters);
+        function hideMenuFiters() {
+            menuFilter.classList.remove("active");
+            document.body.classList.remove("active");
+        }
     </script>
 </asp:Content>

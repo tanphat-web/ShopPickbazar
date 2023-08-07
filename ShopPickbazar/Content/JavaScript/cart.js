@@ -19,15 +19,18 @@ function addProductToCart(event) {
         existingItem.quantity++;
     } else {
         // Nếu sản phẩm chưa tồn tại, thêm vào giỏ hàng với số lượng là 1
-        cart.push({ id: productId, name: productName,image: productImage, price: productPrice, quantity: 1 });
+        cart.push({
+            id: productId,
+            name: productName,
+            image: productImage,
+            price: productPrice,
+            quantity: 1
+        });
     }
-
     // Lưu giỏ hàng mới vào local storage
     saveCartToLocalStorage();
-
     // Hiển thị giỏ hàng mới
     renderCart();
-
 }
 function removeItemCart(event) {
     const productId = parseInt(event.target.dataset.id);
@@ -195,24 +198,4 @@ function renderCart() {
 }
 renderCart();
 
-//async function addToCart(productId) {
-//    try {
-//        const response = await fetch('/AddProductToCart.aspx', {
-//            method: 'POST',
-//            headers: {
-//                'Content-Type': 'application/x-www-form-urlencoded',
-//            },
-//            body: `id=${productId}` // Thêm thông tin productId vào yêu cầu AJAX
-//        });
 
-//        if (response.ok) {
-//            // Phản hồi từ máy chủ thành công (nếu cần thiết, xử lý phản hồi ở đây)
-//            console.log("Product added to cart successfully");
-//        } else {
-//            // Xử lý lỗi khi máy chủ trả về mã lỗi
-//            console.log("Error occurred while adding the product to cart.");
-//        }
-//    } catch (err) {
-//        console.log(err); // Xử lý lỗi khi yêu cầu AJAX gặp sự cố
-//    }
-//}

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="pickbazarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="pickbazarModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CATEGORIES">
           <Key>
             <PropertyRef Name="id" />
@@ -33,6 +33,9 @@
           <Property Name="OrderDate" Type="datetime" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
           <Property Name="UserId" Type="int" />
+          <Property Name="Address" Type="ntext" />
+          <Property Name="Note" Type="ntext" />
+          <Property Name="Payment" Type="bit" />
         </EntityType>
         <EntityType Name="PRODUCTS">
           <Key>
@@ -47,6 +50,7 @@
           <Property Name="Discount" Type="float" />
           <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="DESCRIPTION" Type="ntext" />
+          <Property Name="Hide" Type="bit" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -144,8 +148,7 @@
             <End Role="ORDERDETAILS" EntitySet="ORDERDETAILS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="pickbazarModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -182,6 +185,9 @@
           <Property Name="UserId" Type="Int32" />
           <NavigationProperty Name="ORDERDETAILS" Relationship="Self.FK_OrderDetails_Orders" FromRole="ORDERS" ToRole="ORDERDETAILS" />
           <NavigationProperty Name="USER" Relationship="Self.FK__ORDERS__UserId__628FA481" FromRole="ORDERS" ToRole="USERS" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Payment" Type="Boolean" />
         </EntityType>
         <EntityType Name="PRODUCT">
           <Key>
@@ -198,6 +204,7 @@
           <Property Name="DESCRIPTION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CATEGORy" Relationship="Self.FK__PRODUCTS__Catego__5165187F" FromRole="PRODUCTS" ToRole="CATEGORIES" />
           <NavigationProperty Name="ORDERDETAILS" Relationship="Self.FK__ORDERDETA__Produ__619B8048" FromRole="PRODUCTS" ToRole="ORDERDETAILS" />
+          <Property Name="Hide" Type="Boolean" />
         </EntityType>
         <EntityType Name="sysdiagram">
           <Key>
@@ -326,6 +333,9 @@
           <EntitySetMapping Name="ORDERS">
             <EntityTypeMapping TypeName="pickbazarModel.ORDER">
               <MappingFragment StoreEntitySet="ORDERS">
+                <ScalarProperty Name="Payment" ColumnName="Payment" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
                 <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
@@ -337,6 +347,7 @@
           <EntitySetMapping Name="PRODUCTS">
             <EntityTypeMapping TypeName="pickbazarModel.PRODUCT">
               <MappingFragment StoreEntitySet="PRODUCTS">
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />

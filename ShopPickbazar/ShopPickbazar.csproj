@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AddProductToCart.aspx" />
+    <Content Include="Admin\Categories.aspx" />
     <Content Include="Admin\CreateProduct.aspx" />
     <Content Include="Admin\css\sb-admin-2.css" />
     <Content Include="Admin\css\sb-admin-2.min.css" />
@@ -97,8 +98,10 @@
     <Content Include="Admin\js\sb-admin-2.min.js" />
     <Content Include="Admin\Login.aspx" />
     <Content Include="Admin\Order.aspx" />
+    <Content Include="Admin\ProductCategories.aspx" />
     <Content Include="Admin\ProductDetail.aspx" />
     <Content Include="Admin\Products.aspx" />
+    <Content Include="Admin\ProductsTrash.aspx" />
     <Content Include="Admin\UpdateProduct.aspx" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.js" />
     <Content Include="Admin\vendor\bootstrap\js\bootstrap.bundle.min.js" />
@@ -1769,7 +1772,9 @@
     <Content Include="Admin\vendor\jquery\jquery.min.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.js" />
     <Content Include="Admin\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="ChangePassword.aspx" />
     <Content Include="Checkout.aspx" />
+    <Content Include="Contact.aspx" />
     <Content Include="Content\CSS\input.css" />
     <Content Include="Content\CSS\output.css" />
     <Content Include="Content\CSS\styles.css" />
@@ -1837,8 +1842,11 @@
     <Content Include="Content\JavaScript\main.js" />
     <Content Include="Content\Plugin\flickity.css" />
     <Content Include="Content\Plugin\flickity.pkgd.min.js" />
+    <Content Include="Controls\ButtonProfile.ascx" />
+    <Content Include="Controls\MenuProfile.ascx" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="Models\PickbazarModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PickbazarModel.edmx</DependentUpon>
@@ -1850,6 +1858,7 @@
       <LastGenOutput>PickbazarModel.cs</LastGenOutput>
     </Content>
     <Content Include="ProductDetail.aspx" />
+    <Content Include="Profile.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1859,6 +1868,13 @@
     </Compile>
     <Compile Include="AddProductToCart.aspx.designer.cs">
       <DependentUpon>AddProductToCart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Categories.aspx.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Categories.aspx.designer.cs">
+      <DependentUpon>Categories.aspx</DependentUpon>
     </Compile>
     <Compile Include="Admin\CreateProduct.aspx.cs">
       <DependentUpon>CreateProduct.aspx</DependentUpon>
@@ -1895,6 +1911,13 @@
     <Compile Include="Admin\Order.aspx.designer.cs">
       <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ProductCategories.aspx.cs">
+      <DependentUpon>ProductCategories.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProductCategories.aspx.designer.cs">
+      <DependentUpon>ProductCategories.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\ProductDetail.aspx.cs">
       <DependentUpon>ProductDetail.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1909,12 +1932,26 @@
     <Compile Include="Admin\Products.aspx.designer.cs">
       <DependentUpon>Products.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Admin\ProductsTrash.aspx.cs">
+      <DependentUpon>ProductsTrash.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\ProductsTrash.aspx.designer.cs">
+      <DependentUpon>ProductsTrash.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Admin\UpdateProduct.aspx.cs">
       <DependentUpon>UpdateProduct.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Admin\UpdateProduct.aspx.designer.cs">
       <DependentUpon>UpdateProduct.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ChangePassword.aspx.designer.cs">
+      <DependentUpon>ChangePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Checkout.aspx.cs">
       <DependentUpon>Checkout.aspx</DependentUpon>
@@ -1930,6 +1967,27 @@
     <Compile Include="Client.Master.designer.cs">
       <DependentUpon>Client.Master</DependentUpon>
     </Compile>
+    <Compile Include="Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ButtonProfile.ascx.cs">
+      <DependentUpon>ButtonProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\ButtonProfile.ascx.designer.cs">
+      <DependentUpon>ButtonProfile.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MenuProfile.ascx.cs">
+      <DependentUpon>MenuProfile.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controls\MenuProfile.ascx.designer.cs">
+      <DependentUpon>MenuProfile.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1939,6 +1997,13 @@
     </Compile>
     <Compile Include="Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\CATEGORy.cs">
       <DependentUpon>PickbazarModel.tt</DependentUpon>
@@ -1982,6 +2047,13 @@
       <DependentUpon>ProductDetail.aspx</DependentUpon>
     </Compile>
     <Compile Include="ProductQuantity.cs" />
+    <Compile Include="Profile.aspx.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Profile.aspx.designer.cs">
+      <DependentUpon>Profile.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -2177,6 +2249,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\Avatar\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

@@ -11,34 +11,25 @@ namespace ShopPickbazar.Admin
 {
 
 
-    public partial class Index
+    public partial class Categories
     {
 
         /// <summary>
-        /// recentOrders control.
+        /// labeltest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater recentOrders;
+        protected global::System.Web.UI.WebControls.Label labeltest;
 
         /// <summary>
-        /// RpUsers control.
+        /// dataCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater RpUsers;
-
-        /// <summary>
-        /// ProductsPopular control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater ProductsPopular;
+        protected global::System.Web.UI.WebControls.Repeater dataCategories;
     }
 }

@@ -51,7 +51,12 @@ namespace ShopPickbazar
                 dynamic data =  JsonConvert.DeserializeObject(jsonData);
                 int userId = GetUserIdFromCookie();
                 int totalPrice = GetTotalPrice(data.cart);
-                int orderId = SaveOrder(totalPrice,userId);
+                string address = data.address;
+                string note = data.note;
+                bool method = false;
+                if(data.methodPayment == "1") method = true;
+                else method = false;
+                int orderId = SaveOrder(totalPrice,userId, address, note, method);
                 SaveOrderDetail(orderId, data.cart);
             }
             catch (Exception ex)
@@ -60,7 +65,7 @@ namespace ShopPickbazar
             }
         }
 
-        private int SaveOrder(int totalPrice, int userId)
+        private int SaveOrder(int totalPrice, int userId, string address, string note, bool methodPayment)
         {
             ORDER order = new ORDER
             {
@@ -68,9 +73,11 @@ namespace ShopPickbazar
                 OrderDate = DateTime.Now,
                 Status = "Đang xử lý",
                 TotalPrice = totalPrice,
+                Address = address,
+                Note = note,
+                Payment = methodPayment
             };
-
-            using(pickbazarEntities db = new pickbazarEntities())
+            using (pickbazarEntities db = new pickbazarEntities())
             {
                 db.ORDERS.Add(order);
                 db.SaveChanges();
@@ -80,22 +87,34 @@ namespace ShopPickbazar
 
         private void SaveOrderDetail(int orderId, dynamic cartData)
         {
-            using(pickbazarEntities db =  new pickbazarEntities())
+            using (pickbazarEntities db = new pickbazarEntities())
             {
-                foreach(var item in cartData)
+                foreach (var item in cartData)
                 {
                     int productId = (int)item.id;
                     int quantity = (int)item.quantity;
-                    ORDERDETAIL orderDetail = new ORDERDETAIL
+
+                    // Kiểm tra số lượng sản phẩm > 0 và còn hàng trong kho mới thực hiện thêm vào đơn hàng
+                    if (quantity > 0)
                     {
-                        OrderId = orderId,
-                        ProductId = productId,
-                        Quantity = quantity,
-                    };
-                    db.ORDERDETAILS.Add(orderDetail);
+                        PRODUCT product = db.PRODUCTS.FirstOrDefault(p => p.Id == productId);
+                        if (product != null && product.Quantity >= quantity)
+                        {
+                            // Thêm thông tin chi tiết đơn hàng vào bảng ORDERDETAILS
+                            ORDERDETAIL orderDetail = new ORDERDETAIL
+                            {
+                                OrderId = orderId,
+                                ProductId = productId,
+                                Quantity = quantity,
+                            };
+                            db.ORDERDETAILS.Add(orderDetail);
+
+                            // Trừ số lượng sản phẩm từ bảng PRODUCTS
+                            product.Quantity -= quantity;
+                        }
+                    }
                 }
                 db.SaveChanges();
-               
             }
         }
 
